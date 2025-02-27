@@ -1,52 +1,91 @@
 package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
+
 import co.edu.unbosque.model.RopaDTO;
 
-public class RopaDAO implements CRUDOperation<RopaDTO, RopaDTO> {
+public class RopaDAO implements CRUDOperation<RopaDTO> {
 
-    private ArrayList<RopaDTO> listaRopa;
+	private ArrayList<RopaDTO> listaRopa;
+	private final String SERIALIZED_NAME = "ropa.bat";
 
-    public RopaDAO() {
-        listaRopa = new ArrayList<>();
-    }
+	public RopaDAO() {
 
-    @Override
-    public void crear(RopaDTO nuevoDato) {
-        if (nuevoDato != null) {
-            listaRopa.add(nuevoDato);
-        }
-    }
+		FileHandler.checkFolder();
+		readSerialized();
 
-    @Override
-    public void eliminar(RopaDTO nuevoDato) {
-        listaRopa.remove(nuevoDato);
-    }
+	}
 
-    @Override
-    public void eliminar(int posicionE) {
-        if (posicionE >= 0 && posicionE < listaRopa.size()) {
-            listaRopa.remove(posicionE);
-        }
-    }
+	@Override
+	public void crear(RopaDTO newData) {
 
-    @Override
-    public void actualizar(int posicion, RopaDTO datoActualizado) {
-        if (posicion >= 0 && posicion < listaRopa.size() && datoActualizado != null) {
-            listaRopa.set(posicion, datoActualizado);
-        }
-    }
+		if (find(newData) == null) {
+			listaRopa.add(newData);
+			writeSerialized();
+		}
 
-    @Override
-    public ArrayList<RopaDTO> buscarTodo() {
-        return listaRopa;
-    }
+	}
 
-    @Override
-    public RopaDTO buscarUno(int posicion) {
-        if (posicion >= 0 && posicion < listaRopa.size()) {
-            return listaRopa.get(posicion);
-        }
-        return null;
-    }
+	@Override
+	public void eliminar(RopaDTO toDelete) {
+
+		RopaDTO found = find(toDelete);
+
+		if (found != null) {
+			listaRopa.remove(found);
+			writeSerialized();
+		}
+	}
+
+	@Override
+	public void actualizar(RopaDTO toUpdate, RopaDTO newData) {
+
+		RopaDTO found = find(toUpdate);
+
+		if (found != null) {
+			listaRopa.remove(found);
+			listaRopa.add(newData);
+			writeSerialized();
+		}
+
+	}
+
+	@Override
+	public ArrayList<RopaDTO> getAll() {
+		return listaRopa;
+	}
+
+	@Override
+	public RopaDTO find(RopaDTO toFind) {
+		RopaDTO found = null;
+
+		if (!listaRopa.isEmpty()) {
+			for (RopaDTO r : listaRopa) {
+
+				if (r.getId() == toFind.getId()) {
+					found = r;
+					return found;
+				}
+			}
+
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void readSerialized() {
+		Object content = FileHandler.readSerialized(SERIALIZED_NAME);
+		if (content == null) {
+			listaRopa = new ArrayList<>();
+		} else {
+			listaRopa = (ArrayList<RopaDTO>) content;
+		}
+	}
+
+	@Override
+	public void writeSerialized() {
+		FileHandler.writeSerialized(SERIALIZED_NAME, listaRopa);
+	}
+
 }

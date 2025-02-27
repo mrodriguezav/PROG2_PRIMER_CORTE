@@ -1,52 +1,83 @@
 package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
+
 import co.edu.unbosque.model.JugueteDTO;
 
-public class JugueteDAO implements CRUDOperation<JugueteDTO, JugueteDTO> {
+public class JugueteDAO implements CRUDOperation<JugueteDTO> {
 
-    private ArrayList<JugueteDTO> listaJuguetes;
+	private ArrayList<JugueteDTO> listaJuguetes;
+	private final String SERIALIZED_NAME = "juguetes.bat";
 
-    public JugueteDAO() {
-        listaJuguetes = new ArrayList<>();
-    }
+	@Override
+	public void crear(JugueteDTO newData) {
+		if (find(newData) == null) {
+			listaJuguetes.add(newData);
+			writeSerialized();
+		}
+	}
 
-    @Override
-    public void crear(JugueteDTO nuevoDato) {
-        if (nuevoDato != null) {
-            listaJuguetes.add(nuevoDato);
-        }
-    }
+	@Override
+	public void eliminar(JugueteDTO toDelete) {
 
-    @Override
-    public void eliminar(JugueteDTO nuevoDato) {
-        listaJuguetes.remove(nuevoDato);
-    }
+		JugueteDTO found = find(toDelete);
+		if (found != null) {
+			listaJuguetes.remove(found);
+			writeSerialized();
+		}
+	}
 
-    @Override
-    public void eliminar(int posicionE) {
-        if (posicionE >= 0 && posicionE < listaJuguetes.size()) {
-            listaJuguetes.remove(posicionE);
-        }
-    }
+	@Override
+	public void actualizar(JugueteDTO toUpdate, JugueteDTO newData) {
 
-    @Override
-    public void actualizar(int posicion, JugueteDTO datoActualizado) {
-        if (posicion >= 0 && posicion < listaJuguetes.size() && datoActualizado != null) {
-            listaJuguetes.set(posicion, datoActualizado);
-        }
-    }
+		JugueteDTO found = find(toUpdate);
 
-    @Override
-    public ArrayList<JugueteDTO> buscarTodo() {
-        return listaJuguetes;
-    }
+		if (found != null) {
+			listaJuguetes.remove(found);
+			listaJuguetes.add(newData);
+			writeSerialized();
+		}
+	}
 
-    @Override
-    public JugueteDTO buscarUno(int posicion) {
-        if (posicion >= 0 && posicion < listaJuguetes.size()) {
-            return listaJuguetes.get(posicion);
-        }
-        return null;
-    }
+	@Override
+	public ArrayList<JugueteDTO> getAll() {
+		return listaJuguetes;
+	}
+
+	@Override
+	public JugueteDTO find(JugueteDTO toFind) {
+
+		JugueteDTO found = null;
+
+		if (!listaJuguetes.isEmpty()) {
+
+			for (JugueteDTO j : listaJuguetes) {
+				if (j.getId() == toFind.getId()) {
+					found = j;
+					return found;
+				}
+			}
+
+		}
+
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void readSerialized() {
+
+		Object content = FileHandler.readSerialized(SERIALIZED_NAME);
+		if (content == null) {
+			listaJuguetes = new ArrayList<>();
+		} else {
+			listaJuguetes = (ArrayList<JugueteDTO>) content;
+		}
+	}
+
+	@Override
+	public void writeSerialized() {
+		FileHandler.writeSerialized(SERIALIZED_NAME, listaJuguetes);
+	}
+
 }
