@@ -6,7 +6,11 @@ import java.util.List;
 
 import org.primefaces.model.ResponsiveOption;
 
+import co.edu.unbosque.model.Carne;
+import co.edu.unbosque.model.Juguete;
+import co.edu.unbosque.model.Lacteo;
 import co.edu.unbosque.model.Product;
+import co.edu.unbosque.model.Ropa;
 import co.edu.unbosque.model.Product;
 import co.edu.unbosque.model.UsuarioDTO;
 import co.edu.unbosque.model.persistence.ProductService;
@@ -22,13 +26,13 @@ import jakarta.inject.Named;
 @RequestScoped
 public class UserBean { // Este es el bean de la logica de la pagina de usuarios
 //Se Recomienda crear un atributo para cada input del front
-	private String nombre;
-	private String contrasenia;
-	private UsuarioDAO uDAO;
 	private LocalDate date;
 	private List<Product> products;
 	private List<ResponsiveOption> responsiveOptions;
-    private List<String> productos;
+    private List<Product> listaRopa;
+    private List<Product> listaCarne;
+    private List<Product> listaJuguete;
+    private List<Product> listaLacteo;
     private Product selectedProduct;
     
     @Inject
@@ -38,47 +42,17 @@ public class UserBean { // Este es el bean de la logica de la pagina de usuarios
 
     @PostConstruct
     public void init() {
-        products = service.getProducts(6);
-        responsiveOptions = new ArrayList<>();
-        responsiveOptions.add(new ResponsiveOption("1024px", 3, 3));
-        responsiveOptions.add(new ResponsiveOption("768px", 2, 2));
-        responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
-        productos = new ArrayList<>();
-        productos.add("ropa1.jpg");
-        productos.add("ropa2.png");
-        productos.add("ropa3.jpg");
-        productos.add("ropa4.jpg");
+        products = service.getListaCarne(6);
+        
+        listaRopa = service.getListaRopa();
+        listaCarne = service.getListaCarne();
+        listaJuguete = service.getListaJuguete();
+        listaLacteo = service.getListaLacteo();
+        
+       
     }
     
     
-
-	public UserBean() {
-		uDAO = new UsuarioDAO();
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getContrasenia() {
-		return contrasenia;
-	}
-
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
-
-	public UsuarioDAO getuDAO() {
-		return uDAO;
-	}
-
-	public void setuDAO(UsuarioDAO uDAO) {
-		this.uDAO = uDAO;
-	}
 
 	public LocalDate getDate() {
 		return date;
@@ -94,14 +68,7 @@ public class UserBean { // Este es el bean de la logica de la pagina de usuarios
 	public void setService(ProductService service) {
 	    this.service = service;
 	}
-	    
-	public List<String> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<String> productos) {
-		this.productos = productos;
-	}
+	 
 
 	public Product getSelectedProduct() {
 		return selectedProduct;
@@ -119,10 +86,74 @@ public class UserBean { // Este es el bean de la logica de la pagina de usuarios
 		this.responsiveOptions = responsiveOptions;
 	}
 	
+	public List<Product> getListaRopa() {
+		return listaRopa;
+	}
+
+
+
+	public void setListaRopa(List<Product> listaRopa) {
+		this.listaRopa = listaRopa;
+	}
+
+
+
+	public List<Product> getListaCarne() {
+		return listaCarne;
+	}
+
+
+
+	public void setListaCarne(List<Product> listaCarne) {
+		this.listaCarne = listaCarne;
+	}
+
+
+
+	public List<Product> getListaJuguete() {
+		return listaJuguete;
+	}
+
+
+
+	public void setListaJuguete(List<Product> listaJuguete) {
+		this.listaJuguete = listaJuguete;
+	}
+
+
+
+	public List<Product> getListaLacteo() {
+		return listaLacteo;
+	}
+
+
+
+	public void setListaLacteo(List<Product> listaLacteo) {
+		this.listaLacteo = listaLacteo;
+	}
+
+
+
+	public ProductService getService() {
+		return service;
+	}
+
+
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+
+
 	public void guardar() {
 		System.out.println(nombre);
 		System.out.println(contrasenia);
 		uDAO.crear(new UsuarioDTO(nombre, contrasenia));
+		
+	}
+	
+	public void guardarCarne() {
 		
 	}
 
