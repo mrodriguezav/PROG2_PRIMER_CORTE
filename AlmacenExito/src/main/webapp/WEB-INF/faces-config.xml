@@ -7,17 +7,23 @@
 		<managed-bean-name>AlimentoCarnicoBean</managed-bean-name>
 		<managed-bean-class>co.edu.unbosque.beans.AlimentoCarnicoBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
-		
+	</managed-bean>
+
+	<managed-bean>
 		<managed-bean-name>AlimentoLacteoBean</managed-bean-name>
 		<managed-bean-class>co.edu.unbosque.beans.AlimentoLacteoBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 
+	<managed-bean>
 		<managed-bean-name>JugueteBean</managed-bean-name>
 		<managed-bean-class>co.edu.unbosque.beans.JugueteBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 
+	<managed-bean>
 		<managed-bean-name>RopaBean</managed-bean-name>
-		<managed-bean-class>co.edu.unbosque.beans.</managed-bean-class>
+		<managed-bean-class>co.edu.unbosque.beans.RopaBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 </faces-config>
