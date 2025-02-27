@@ -15,6 +15,7 @@
 		href="#{request.contextPath}/css/styles.css" />
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+	<link rel="stylesheet" href="css/all.css" />
 
 </h:head>
 <h:body>
@@ -24,55 +25,32 @@
 			<p:megaMenu orientation="horizontal" autoDisplay="false"
 				styleClass=".ui-megamenu">
 				<f:facet name="start">
-					<img src="media/logo.png" width="150"
-						alt="Descripción de la imagen" />
-
+					<img src="resources/media/logo.png" width="150"	 />
+					
 				</f:facet>
-				<p:submenu label="Productos">
+				
+				<p:menuitem icon="fa-solid fa-house" outcome="index"/>
+				<p:submenu label="Mercado" icon="fa-solid fa-bowl-food">
 					<p:column>
 						<p:submenu>
-							<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad" />
-							<p:menuitem value="Lacteos" icon="fa-solid fa-cow" />
-							<p:menuitem value="Carnes" icon="fa-regular fa-steak" />
-							<p:menuitem value="Ropa" icon="fa-solid fa-shirt"/>
+							<p:menuitem value="Lacteos" icon="fa-solid fa-cow" outcome="lacteos" />
+							<p:menuitem value="Carnes" icon="fa-regular fa-steak" outcome="carnes" />
 						</p:submenu>
 					</p:column>
 
 				</p:submenu>
-
-				<p:submenu label="Users" icon="pi pi-fw pi-users">
-
+				
+				<p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger" outcome="ropa">
 					<p:column>
-						<p:submenu>
-							<p:menuitem value="User 1.1" />
-							<p:menuitem value="User 1.2" />
-							<p:menuitem value="User 2.1" />
-							<p:menuitem value="User 2.2" />
+						<p:submenu >
+							<p:menuitem value="Hombre" outcome="ropa" />
+							<p:menuitem value="Mujer" outcome="ropa"/>
+							<p:menuitem value="Niño" outcome="ropa"/>
 						</p:submenu>
 					</p:column>
 				</p:submenu>
-
-				<p:submenu label="Carrito" icon="pi pi-fw pi-calendar">
-					<p:column>
-						<p:submenu label="Event 1">
-							<p:menuitem value="Event 1.1" />
-							<p:menuitem value="Event 1.2" />
-							<p:menuitem value="Event 2.1" />
-							<p:menuitem value="Event 2.2" />
-						</p:submenu>
-					</p:column>
-				</p:submenu>
-
-				<p:submenu label="Settings" icon="pi pi-fw pi-cog">
-					<p:column>
-						<p:submenu label="Setting 1">
-							<p:menuitem value="Setting 1.1" />
-							<p:menuitem value="Setting 1.2" />
-							<p:menuitem value="Setting 2.1" />
-							<p:menuitem value="Setting 2.2" />
-						</p:submenu>
-					</p:column>
-				</p:submenu>
+				
+				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad" outcome="juguetes"/>
 
 				<f:facet name="end">
 					<div class="ui-input-icon-left mr-2">
@@ -82,9 +60,82 @@
 					<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 						styleClass="ui-button-info" />
 				</f:facet>
+				
 			</p:megaMenu>
 		</h:form>
 	</div>
+<style>
+	    .product-item .product-item-content {
+	        border: 1px solid var(--surface-d);
+	        border-radius: 3px;
+	        margin: .3rem;
+	        text-align: center;
+	        padding: 2rem 0;
+	    }
+	
+	    .product-item .product-image {
+	        width: 50%;
+	        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+	    }
+	</style>
+	
+	
+	<h:form id="form">
+	
+	  <div class="card">
+	        <p:carousel value="#{userBean.products}" var="product" circular="true" autoplayInterval="3000"
+	                    responsiveOptions="#{userBean.responsiveOptions}" numVisible="3" numScroll="1">
+	           
+	            <div class="product-item">
+	                <div class="product-item-content">
+	                    <div class="mb-3">
+	                        <p:graphicImage value="./resources/media/#{product.image}" styleClass="product-image"/>
+	                    </div>
+	                    <div>
+	                        <h4 class="mb-1">#{product.name}</h4>
+	                        <h6 class="mt-0 mb-3">
+	                            <h:outputText value="#{product.price}">
+	                                <f:convertNumber type="currency" pattern="¤#0" currencySymbol="$" />
+	                            </h:outputText>
+	                        </h6>
+	                      <span class="product-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span> 
+	                        <div class="mt-5">
+	                            <p:commandButton type="button" icon="pi pi-search" styleClass="rounded-button mr-2" />
+	                            <p:commandButton type="button" icon="pi pi-star" styleClass="ui-button-success rounded-button mr-2" />
+	                            <p:commandButton type="button" icon="pi pi-cog" styleClass="ui-button-help rounded-button" />
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </p:carousel>
+	    </div>
+	    
+	    <p:panelGrid columns="4" style="width:100%; background:#f8f8f8; padding:15px; text-align:left;">
+    <p:column>
+        <h3>Contáctanos</h3>
+        <p>Ventas WhatsApp: (+57) 305 482 90 46</p>
+        <p>Servicio al cliente: (+57) 305 261 54 42</p>
+    </p:column>
 
+    <p:column>
+        <h3>Centro de Ayudas</h3>
+        <p><h:outputLink value="#">Preguntas frecuentes</h:outputLink></p>
+        <p><h:outputLink value="#">Política de cambios</h:outputLink></p>
+    </p:column>
+
+    <p:column>
+        <h3>Información Legal</h3>
+        <p><h:outputLink value="#">Términos y condiciones</h:outputLink></p>
+        <p><h:outputLink value="#">Política de privacidad</h:outputLink></p>
+    </p:column>
+
+    <p:column>
+        <h3>Comunidades</h3>
+        <p><h:outputLink value="#">Vivevinos</h:outputLink></p>
+        <p><h:outputLink value="#">Exploradores Éxito</h:outputLink></p>
+    </p:column>
+</p:panelGrid>
+	    
+	</h:form>
 </h:body>
 </html>

@@ -23,55 +23,31 @@
 			<p:megaMenu orientation="horizontal" autoDisplay="false"
 				styleClass=".ui-megamenu">
 				<f:facet name="start">
-					<img src="media/logo.png" width="150"
-						alt="Descripción de la imagen" />
+					<img src="resources/media/logo.png" width="150"	 />
 
 				</f:facet>
-				<p:submenu label="Productos">
+		<p:menuitem icon="fa-solid fa-house" outcome="index"/>
+				<p:submenu label="Mercado" icon="fa-solid fa-bowl-food">
 					<p:column>
 						<p:submenu>
-						<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad" />
-							<p:menuitem value="Lacteos" icon="fa-solid fa-cow" />
-							<p:menuitem value="Carnes" icon="fa-regular fa-steak" />
-							<p:menuitem value="Ropa" icon="fa-solid fa-shirt"/>
+							<p:menuitem value="Lacteos" icon="fa-solid fa-cow" outcome="lacteos" />
+							<p:menuitem value="Carnes" icon="fa-regular fa-steak" outcome="carnes" />
 						</p:submenu>
 					</p:column>
 
 				</p:submenu>
-
-				<p:submenu label="Users" icon="pi pi-fw pi-users">
-
+				
+				<p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger" outcome="ropa">
 					<p:column>
-						<p:submenu>
-							<p:menuitem value="User 1.1" />
-							<p:menuitem value="User 1.2" />
-							<p:menuitem value="User 2.1" />
-							<p:menuitem value="User 2.2" />
+						<p:submenu >
+							<p:menuitem value="Hombre" outcome="ropa" />
+							<p:menuitem value="Mujer" outcome="ropa"/>
+							<p:menuitem value="Niño" outcome="ropa"/>
 						</p:submenu>
 					</p:column>
 				</p:submenu>
-
-				<p:submenu label="Carrito" icon="pi pi-fw pi-calendar">
-					<p:column>
-						<p:submenu label="Event 1">
-							<p:menuitem value="Event 1.1" />
-							<p:menuitem value="Event 1.2" />
-							<p:menuitem value="Event 2.1" />
-							<p:menuitem value="Event 2.2" />
-						</p:submenu>
-					</p:column>
-				</p:submenu>
-
-				<p:submenu label="Settings" icon="pi pi-fw pi-cog">
-					<p:column>
-						<p:submenu label="Setting 1">
-							<p:menuitem value="Setting 1.1" />
-							<p:menuitem value="Setting 1.2" />
-							<p:menuitem value="Setting 2.1" />
-							<p:menuitem value="Setting 2.2" />
-						</p:submenu>
-					</p:column>
-				</p:submenu>
+				
+				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad" outcome="juguetes"/>
 
 				<f:facet name="end">
 					<div class="ui-input-icon-left mr-2">
