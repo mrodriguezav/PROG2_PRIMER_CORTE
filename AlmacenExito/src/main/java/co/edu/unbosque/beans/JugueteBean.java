@@ -58,7 +58,7 @@ public class JugueteBean implements Serializable {
 				iterator.remove();
 
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Producto eliminado correctamente"));
+						new FacesMessage("Producto eliminado  correctamente"));
 				break;
 			}
 		}
