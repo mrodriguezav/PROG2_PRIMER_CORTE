@@ -147,7 +147,7 @@
 						</p:column>
 						<p:column headerText="Acciones">
 							<p:commandButton value="Eliminar"
-								action="#{jugeteBean.delete(carnico)}" update="@form"
+								action="#{jugeteBean.delete(juguete)}" update="@form"
 								styleClass="ui-button-danger" />
 						</p:column>
 					</p:dataTable>
@@ -172,7 +172,7 @@
 						<h5>Precio:</h5>
 						<h:inputText id="precioEdit" class="form-control"
 							value="#{AlimentoCarnicoBean.selected.precio}"
-							rendered="#{not empty AlimentoCarnicoBean.selected}">
+							rendered="#{not empty jugueteBean.selected}">
 							<f:convertNumber integerOnly="true" />
 						</h:inputText>
 
@@ -276,8 +276,9 @@
 						</p:column>
 
 						<p:column headerText="Imagen">
-							<h:outputText value="#{juguete.imagen}" />
-						</p:column>
+                                <h:graphicImage value="#{juguete.imagen}"
+                                    alt="Imagen" width="100" height="100" />
+                            </p:column>
 
 						<p:column headerText="Tipo">
 							<h:outputText value="#{juguete.tipo}" />
