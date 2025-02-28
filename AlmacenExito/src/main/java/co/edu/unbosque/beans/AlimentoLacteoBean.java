@@ -30,7 +30,7 @@ public class AlimentoLacteoBean implements Serializable {
 	private String marca;
 	private String tipo;
 	private boolean button = true;
-	private ArrayList<AlimentoLacteoDTO> list;
+	private ArrayList<AlimentoLacteoDTO> list = new ArrayList<>();
 	private AlimentoLacteoDAO aDao;
 	private AlimentoLacteoDTO selected;
 

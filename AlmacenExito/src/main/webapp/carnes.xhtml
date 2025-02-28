@@ -88,7 +88,10 @@
 
 						<h5>Cantidad:</h5>
 						<h:inputText class="form-control" id="cantidad"
-							value="#{AlimentoCarnicoBean.cantidad}" />
+							value="#{AlimentoCarnicoBean.cantidad}">
+							<f:convertNumber doubleOnly="true" />
+						</h:inputText>
+
 
 						<h5>Nombre:</h5>
 						<h:inputText class="form-control" id="nombre"

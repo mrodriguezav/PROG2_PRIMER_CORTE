@@ -10,10 +10,8 @@ public class RopaDAO implements CRUDOperation<RopaDTO> {
 	private final String SERIALIZED_NAME = "ropa.bat";
 
 	public RopaDAO() {
-
 		FileHandler.checkFolder();
 		readSerialized();
-
 	}
 
 	@Override

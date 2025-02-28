@@ -8,6 +8,12 @@ public class AlimentoLacteoDAO implements CRUDOperation<AlimentoLacteoDTO> {
 	private ArrayList<AlimentoLacteoDTO> listaAlimentosLacteos;
 	private final String SERIALIZED_NAME = "alimentosLacteos.bat";
 
+	public AlimentoLacteoDAO() {
+
+		FileHandler.checkFolder();
+		readSerialized();
+	}
+
 	@Override
 	public void crear(AlimentoLacteoDTO newData) {
 		if (find(newData) == null) {
