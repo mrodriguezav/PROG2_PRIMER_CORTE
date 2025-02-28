@@ -178,7 +178,7 @@
 							rendered="#{not empty AlimentoCarnicoBean.selected}">
 							<f:convertNumber integerOnly="true" />
 						</h:inputText>
-						
+
 						<h5>Nombre:</h5>
 						<h:inputText id="nombreEdit" class="form-control"
 							value="#{AlimentoCarnicoBean.selected.nombre}"
@@ -221,10 +221,7 @@
 							value="#{AlimentoCarnicoBean.selected.peso}"
 							rendered="#{not empty AlimentoCarnicoBean.selected}" />
 
-						<h5>Es procesada?</h5>
-						<h:selectBooleanCheckbox id="procesadaEdit"
-							value="#{AlimentoCarnicoBean.selected.esProcesada}"
-							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
 
 					</h:panelGrid>
 
@@ -274,9 +271,6 @@
 							<h:outputText value="#{carnico.peso}" />
 						</p:column>
 
-						<p:column headerText="Es procesada">
-							<h:outputText value="#{carnico.esProcesada}" />
-						</p:column>
 
 					</p:dataTable>
 				</p:tab>
