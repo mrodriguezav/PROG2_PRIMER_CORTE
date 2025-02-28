@@ -15,13 +15,12 @@ public class RopaBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private double precio;
+	private int precio;
 	private int cantidad;
 	private String nombre;
 	private String descripcion;
 	private String imagen;
-	private String size;
-	private String color;
-	private String brand;
-	private String material;
+	
+	
+	
 }

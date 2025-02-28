@@ -61,71 +61,203 @@
 		</h:form>
 	</div>
 	
+		<h1>Tabla de producto: alimento lacteo</h1>
+	<hr />
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
 		<div class="card">
-    <h:form id="form">
-        <p:dataTable id="products" var="product" value="#{userBean.products}" rowKey="#{product.id}"
-                     selection="#{userBean.selectedProduct}" selectionMode="single">
-            <f:facet name="header">
-            </f:facet>
+			<h5 class="mt-0">Administrando lacteos</h5>
+			<p:tabView>
 
-            <p:column headerText="Code">
-                <h:outputText value="#{product.code}" />
-            </p:column>
-            <p:column headerText="Name">
-                <h:outputText value="#{product.name}" />
-            </p:column>
-            <p:column headerText="Category">
-                <h:outputText value="#{product.category}" />
-            </p:column>
-            <p:column headerText="Quantity">
-                <h:outputText value="#{product.quantity}" />
-            </p:column>
-        </p:dataTable>
+				<p:tab title="Crear">
+					<h:panelGrid columns="2" style="width:100%">
 
-        <p:contextMenu for="products">
-            <p:menuitem value="View" update="productDetail" icon="pi pi-search"
-                        oncomplete="PF('productDialog').show()" actionListener="#{userBean.viewProduct}"/>
-            <p:menuitem value="Delete" update="products" icon="pi pi-times"
-                        action="#{userBean.deleteProduct}"/>
-        </p:contextMenu>
+						<h5>Precio:</h5>
+						<h:inputText class="form-control" id="precio"
+							value="#{AlimentoLacteoBean.precio}">
+							<f:convertNumber doubleOnly="true" />
+						</h:inputText>
 
-        <p:dialog header="Product Info" widgetVar="productDialog" modal="true" showEffect="fade"
-                  hideEffect="fade" resizable="false">
-            <p:outputPanel id="productDetail" style="text-align:center;">
-                <p:column rendered="#{not empty userBean.selectedProduct}">
-                    <div class="product">
-                        <div class="product-grid-item border-0" style="margin-bottom: 0">
-                            <div class="product-grid-item-top">
-                                <div>
-                                    <i class="pi pi-tag product-category-icon"/>
-                                    <span class="product-category">#{userBean.selectedProduct.category}</span>
-                                </div>
-                                <span class="product-badge status-#{userBean.selectedProduct.inventoryStatus.name().toLowerCase()}">#{dtContextMenuView.selectedProduct.inventoryStatus.text}</span>
-                            </div>
-                            <div class="product-grid-item-content">
-                                <p:graphicImage
-                                        name="demo/images/product/#{userBean.selectedProduct.image}"/>
-                                <div class="product-name">#{userBean.selectedProduct.name}</div>
-                                <div class="product-description">#{userBean.selectedProduct.description}</div>
-                                <p:rating readonly="true" value="#{userBean.selectedProduct.rating}"/>
-                            </div>
-                            <div class="product-grid-item-bottom">
-                                <h:outputText value="#{userBean.selectedProduct.price}"
-                                              styleClass="product-price">
-                                    <f:convertNumber currencySymbol="$" type="currency"/>
-                                </h:outputText>
-                                <p:commandButton type="button" value="Add To Cart"
-                                                 icon="pi pi-shopping-cart"
-                                                 disabled="#{userBean.selectedProduct.inventoryStatus == 'OUTOFSTOCK'}">
-                                </p:commandButton>
-                            </div>
-                        </div>
-                    </div>
-                </p:column>
-            </p:outputPanel>
-        </p:dialog>
-    </h:form>
-</div>
+
+						<h5>Cantidad:</h5>
+						<h:inputText class="form-control" id="cantidad"
+							value="#{AlimentoLacteoBean.cantidad}" />
+
+						<h5>Nombre:</h5>
+						<h:inputText class="form-control" id="nombre"
+							value="#{AlimentoLacteoBean.nombre}" />
+
+						<h5>Descripción:</h5>
+						<h:inputText class="form-control" id="descripcion"
+							value="#{AlimentoLacteoBean.descripcion}" />
+
+						<h5>Imagen:</h5>
+						<h:inputText class="form-control" id="imagen"
+							value="#{AlimentoLacteoBean.imagen}" />
+
+
+						<h5>Marca:</h5>
+						<h:inputText class="form-control" id="marca"
+							value="#{AlimentoLacteoBean.marca}" />
+						
+					
+
+						<!-- MI PESO ES UN DOUBLE-->
+						<h5>Peso:</h5>
+						<h:inputText class="form-control" id="peso"
+							value="#{AlimentoCarnicoBean.peso}" />
+					</h:panelGrid>
+
+					<p:commandButton class="ui-button-primary"
+						action="#{AlimentoCarnicoBean.save}" value="Save" update="@form" />
+				</p:tab>
+
+				<!-- TAB ELIMINAR -->
+				<p:tab title="Eliminar">
+					<p:dataTable var="carnico" value="#{AlimentoCarnicoBean.list}"
+						selectionMode="single" selection="#{AlimentoCarnicoBean.selected}"
+						rowKey="#{carnico.nombre}" style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{carnico.nombre}" />
+						</p:column>
+						<p:column headerText="Acciones">
+							<p:commandButton value="Eliminar"
+								action="#{AlimentoCarnicoBean.delete(carnico)}" update="@form"
+								styleClass="ui-button-danger" />
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+
+				<!-- TAB ACTUALIZAR -->
+				<p:tab title="Actualizar">
+					<h:outputText
+						value="Seleccione un alimento carnico para actualizar:" />
+					<p:dataTable var="carnico" value="#{AlimentoCarnicoBean.list}"
+						selectionMode="single" selection="#{AlimentoCarnicoBean.selected}"
+						rowKey="#{carnico.id}" style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{carnico.nombre}" />
+						</p:column>
+					</p:dataTable>
+					<hr></hr>
+
+					<!-- FORMULARIO DE EDICIÓN -->
+					<h:panelGrid columns="2" style="width:100%">
+
+						<h5>Precio:</h5>
+						<h:inputText id="precioEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.precio}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}">
+							<f:convertNumber integerOnly="true" />
+						</h:inputText>
+
+						<h5>Cantidad:</h5>
+						<h:inputText id="cantidadEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.cantidad}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}">
+							<f:convertNumber integerOnly="true" />
+						</h:inputText>
+
+						<h5>Nombre:</h5>
+						<h:inputText id="nombreEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.nombre}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+						<h5>Descripcion:</h5>
+						<h:inputText id="descripcionEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.descripcion}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+						<h5>Imagen:</h5>
+						<h:inputText id="imagenEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.imagen}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+						<div class="ui-fluid formgrid grid">
+							<div class="field col-12 md:col-4">
+								<h5>Animal origen:</h5>
+								<p:selectOneMenu id="optionUpd"
+									value="#{AlimentoCarnicoBean.selected.animalOrigen}"
+									rendered="#{not empty AlimentoCarnicoBean.selected}">
+									<f:selectItem itemLabel="Selecciona una" itemValue="" />
+									<f:selectItem itemLabel="Res" itemValue="Res" />
+									<f:selectItem itemLabel="Cerdo" itemValue="Cerdo" />
+									<f:selectItem itemLabel="Pollo" itemValue="Pollo" />
+									<f:selectItem itemLabel="Cordero" itemValue="Cordero" />
+									<f:selectItem itemLabel="Pescado" itemValue="Pescado" />
+									<f:selectItem itemLabel="Conejo" itemValue="Conejo" />
+									<f:selectItem itemLabel="Pato" itemValue="Pato" />
+									<f:facet name="footer">
+										<p:divider styleClass="mt-0" />
+										<h:outputText value="7 opciones" style="font-weight:bold;" />
+									</f:facet>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<h5>Peso:</h5>
+						<h:inputText id="pesoEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.peso}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+
+
+					</h:panelGrid>
+
+					<p:commandButton value="Seleccionar alimento Carnico"
+						action="#{AlimentoCarnicoBean.action}"
+						rendered="#{AlimentoCarnicoBean.button}" update="@form"
+						styleClass="ui-button-primary" />
+
+					<p:commandButton value="Actualizar"
+						action="#{AlimentoCarnicoBean.update}" update="@form"
+						styleClass="ui-button-primary" />
+				</p:tab>
+
+				<!-- TAB MOSTRAR -->
+				<p:tab title="Mostrar">
+					<p:dataTable var="carnico" value="#{AlimentoCarnicoBean.list}"
+						style="width:100%">
+						<p:column headerText="Id">
+							<h:outputText value="#{carnico.id}" />
+						</p:column>
+
+						<p:column headerText="Precio">
+							<h:outputText value="#{carnico.precio}" />
+						</p:column>
+
+						<p:column headerText="Cantidad">
+							<h:outputText value="#{carnico.cantidad}" />
+						</p:column>
+
+						<p:column headerText="Nombre">
+							<h:outputText value="#{carnico.nombre}" />
+						</p:column>
+
+						<p:column headerText="Descripcion">
+							<h:outputText value="#{carnico.descripcion}" />
+						</p:column>
+
+						<p:column headerText="Imagen">
+							<h:outputText value="#{carnico.imagen}" />
+						</p:column>
+
+						<p:column headerText="Animal Origen">
+							<h:outputText value="#{carnico.animalOrigen}" />
+						</p:column>
+
+						<p:column headerText="Peso">
+							<h:outputText value="#{carnico.peso}" />
+						</p:column>
+
+
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+		</div>
+	</h:form>
+		
 	
 </h:body>
 </html>
