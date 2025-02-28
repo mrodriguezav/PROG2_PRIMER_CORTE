@@ -9,6 +9,11 @@ public class JugueteDAO implements CRUDOperation<JugueteDTO> {
 	private ArrayList<JugueteDTO> listaJuguetes;
 	private final String SERIALIZED_NAME = "juguetes.bat";
 
+	public JugueteDAO() {
+		FileHandler.checkFolder();
+		readSerialized();
+	}
+	
 	@Override
 	public void crear(JugueteDTO newData) {
 		if (find(newData) == null) {
