@@ -46,6 +46,7 @@ public class AlimentoLacteoBean implements Serializable {
 		aDao.crear(new AlimentoLacteoDTO(id, precio, cantidad, nombre, descripcion, imagen, marca, tipo));
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto Agregado exitosamente"));
+		cleanFields();
 	}
 
 	public void delete(AlimentoLacteoDTO selected) {
@@ -92,7 +93,7 @@ public class AlimentoLacteoBean implements Serializable {
 		this.descripcion = "";
 		this.imagen = "";
 		this.marca = "";
-		this.imagen = "";
+		this.tipo = "";
 	}
 
 	public boolean checkButton() {

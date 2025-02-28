@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
 
-import co.edu.unbosque.model.AlimentoCarnicoDTO;
 import co.edu.unbosque.model.RopaDTO;
-import co.edu.unbosque.model.persistence.AlimentoCarnicoDAO;
 import co.edu.unbosque.model.persistence.RopaDAO;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -173,7 +171,7 @@ public class RopaBean implements Serializable {
 	public void setrDAO(RopaDAO rDAO) {
 		this.rDAO = rDAO;
 	}
-	
+
 	public ArrayList<RopaDTO> getList() {
 		return list;
 	}
@@ -194,5 +192,4 @@ public class RopaBean implements Serializable {
 		return serialVersionUID;
 	}
 
-	
 }
