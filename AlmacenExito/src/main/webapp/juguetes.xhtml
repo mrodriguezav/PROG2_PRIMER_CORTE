@@ -18,37 +18,21 @@
 </h:head>
 <h:body>
 
+	
 	<div class="card">
 		<h:form>
 			<p:megaMenu orientation="horizontal" autoDisplay="false"
-				styleClass=".ui-megamenu">
+				styleClass="ui-megamenu">
 				<f:facet name="start">
-					<img src="resources/media/logo.png" width="150"	 />
-
+					<img src="resources/media/logo.png" width="150" />
 				</f:facet>
-		<p:menuitem icon="fa-solid fa-house" outcome="index"/>
-				<p:submenu label="Mercado" icon="fa-solid fa-bowl-food">
-					<p:column>
-						<p:submenu>
-							<p:menuitem value="Lacteos" icon="fa-solid fa-cow" outcome="lacteos" />
-							<p:menuitem value="Carnes" icon="fa-regular fa-steak" outcome="carnes" />
-						</p:submenu>
-					</p:column>
-
-				</p:submenu>
-				
-				<p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger" >
-					<p:column>
-						<p:submenu >
-							<p:menuitem value="Hombre" outcome="ropa" />
-							<p:menuitem value="Mujer" outcome="ropa"/>
-							<p:menuitem value="Niño" outcome="ropa"/>
-						</p:submenu>
-					</p:column>
-				</p:submenu>
-				
-				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad" outcome="juguetes"/>
-
+				<p:menuitem icon="fa-solid fa-house" outcome="index" />
+				<p:menuitem value="Carnes" icon="fa-solid fa-drumstick-bite"
+					outcome="carnes" />
+				<p:menuitem value="Lácteos" icon="fa-solid fa-cow" outcome="lacteos" />
+				<p:menuitem value="Ropa" icon="fa-solid fa-tshirt" outcome="ropa" />
+				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad"
+					outcome="juguetes" />
 				<f:facet name="end">
 					<div class="ui-input-icon-left mr-2">
 						<i class="pi pi-fw pi-search" />
@@ -79,7 +63,6 @@
 							<f:convertNumber doubleOnly="true" />
 						</h:inputText>
 
-
 						<h5>Cantidad:</h5>
 						<h:inputText class="form-control" id="cantidad"
 							value="#{JugueteBean.cantidad}" />
@@ -100,7 +83,7 @@
 							<div class="field col-12 md:col-4">
 								<h5>Tipo:</h5>
 								<p:selectOneMenu id="tipo"
-									value="#{JugueteBean.tipo}">
+									value="#{JugueteBean.tipoCliente}">
 									<f:selectItem itemLabel="Selecciona una" itemValue="" />
 									<f:selectItem itemLabel="Juguetes de construcción" itemValue="Res" />
 									<f:selectItem itemLabel="Juguetes educativos" itemValue="Cerdo" />
@@ -202,7 +185,7 @@
 							<div class="field col-12 md:col-4">
 								<h5>Tipo:</h5>
 								<p:selectOneMenu id="Tipo"
-									value="#{JugueteBean.tipo}">
+									value="#{JugueteBean.tipoCliente}">
 									<f:selectItem itemLabel="Selecciona una" itemValue="" />
 									<f:selectItem itemLabel="Juguetes de construcción" itemValue="Res" />
 									<f:selectItem itemLabel="Juguetes educativos" itemValue="Cerdo" />
@@ -276,7 +259,7 @@
                             </p:column>
 
 						<p:column headerText="Tipo">
-							<h:outputText value="#{juguete.tipo}" />
+							<h:outputText value="#{juguete.tipoCliente}" />
 						</p:column>
 
 						<p:column headerText="Marca">

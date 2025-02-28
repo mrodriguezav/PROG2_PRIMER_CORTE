@@ -1,3 +1,7 @@
+/**
+ * Bean administrado para la gestión de objetos AlimentoLacteoDTO en una aplicación JSF.
+ * Proporciona métodos para crear, actualizar y eliminar productos..
+ */
 package co.edu.unbosque.beans;
 
 import java.io.Serializable;
@@ -12,11 +16,16 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
+/**
+ * Clase RopaBean que maneja la lógica de negocio para la gestión de ropa en la
+ * aplicación.
+ */
 @Named("RopaBean")
 @SessionScoped
-
 public class RopaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	// Atributos de la clase
 	private String id;
 	private int precio;
 	private int cantidad;
@@ -30,28 +39,36 @@ public class RopaBean implements Serializable {
 	private RopaDAO rDAO;
 	private RopaDTO selected;
 
+	/**
+	 * Constructor de la clase. Inicializa el DAO y carga la lista de ropa.
+	 */
 	public RopaBean() {
 		rDAO = new RopaDAO();
 		selected = new RopaDTO();
 		list = rDAO.getAll();
 	}
 
+	/**
+	 * Guarda un nuevo producto de ropa en la base de datos.
+	 */
 	public void save() {
 		String id = UUID.randomUUID().toString();
-
 		rDAO.crear(new RopaDTO(id, precio, cantidad, nombre, descripcion, imagen, size, color));
-
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto Agregado exitosamente"));
 		cleanFields();
 	}
 
+	/**
+	 * Elimina un producto de la lista de ropa.
+	 * 
+	 * @param selected Producto seleccionado a eliminar.
+	 */
 	public void delete(RopaDTO selected) {
 		Iterator<RopaDTO> iterator = list.iterator();
 		while (iterator.hasNext()) {
 			RopaDTO u = iterator.next();
 			if (u.equals(selected)) {
 				iterator.remove();
-
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Producto eliminado correctamente"));
 				break;
@@ -59,6 +76,9 @@ public class RopaBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Actualiza la información de un producto seleccionado.
+	 */
 	public void update() {
 		if (selected != null) {
 			for (RopaDTO u : list) {
@@ -71,16 +91,17 @@ public class RopaBean implements Serializable {
 					u.getImagen();
 					u.getSize();
 					u.getColor();
-
 					FacesContext.getCurrentInstance().addMessage(null,
 							new FacesMessage("Producto actualizado correctamente"));
 					break;
 				}
 			}
 		}
-
 	}
 
+	/**
+	 * Limpia los campos del formulario después de una acción.
+	 */
 	public void cleanFields() {
 		this.id = "";
 		this.precio = 0;
@@ -92,15 +113,23 @@ public class RopaBean implements Serializable {
 		this.color = "";
 	}
 
+	/**
+	 * Verifica el estado del botón.
+	 * 
+	 * @return Estado actual del botón.
+	 */
 	public boolean checkButton() {
 		return button;
 	}
-	
+
+	/**
+	 * Acción para cambiar el estado del botón.
+	 */
 	public void action() {
 		button = false;
 	}
 
-	
+	// Métodos Getters y Setters
 	public String getId() {
 		return id;
 	}
@@ -200,5 +229,4 @@ public class RopaBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }
