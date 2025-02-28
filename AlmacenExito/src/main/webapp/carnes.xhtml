@@ -22,38 +22,17 @@
 	<div class="card">
 		<h:form>
 			<p:megaMenu orientation="horizontal" autoDisplay="false"
-				styleClass=".ui-megamenu">
+				styleClass="ui-megamenu">
 				<f:facet name="start">
 					<img src="resources/media/logo.png" width="150" />
-
 				</f:facet>
-
 				<p:menuitem icon="fa-solid fa-house" outcome="index" />
-
-				<p:submenu label="Mercado" icon="fa-solid fa-bowl-food">
-					<p:column>
-						<p:submenu>
-							<p:menuitem value="Lacteos" icon="fa-solid fa-cow" />
-							<p:menuitem value="Carnes" icon="fa-regular fa-steak" />
-						</p:submenu>
-					</p:column>
-
-				</p:submenu>
-
-				<p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger"
-					outcome="ropa">
-					<p:column>
-						<p:submenu>
-							<p:menuitem value="Hombre" outcome="ropa" />
-							<p:menuitem value="Mujer" outcome="ropa" />
-							<p:menuitem value="Niño" outcome="ropa" />
-						</p:submenu>
-					</p:column>
-				</p:submenu>
-
+				<p:menuitem value="Carnes" icon="fa-solid fa-drumstick-bite"
+					outcome="carnes" />
+				<p:menuitem value="Lácteos" icon="fa-solid fa-cow" outcome="lacteos" />
+				<p:menuitem value="Ropa" icon="fa-solid fa-tshirt" outcome="ropa" />
 				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad"
 					outcome="juguetes" />
-
 				<f:facet name="end">
 					<div class="ui-input-icon-left mr-2">
 						<i class="pi pi-fw pi-search" />
@@ -62,7 +41,6 @@
 					<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 						styleClass="ui-button-info" />
 				</f:facet>
-
 			</p:megaMenu>
 		</h:form>
 	</div>

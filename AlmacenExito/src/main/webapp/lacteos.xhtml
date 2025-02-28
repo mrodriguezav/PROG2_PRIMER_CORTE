@@ -1,168 +1,228 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
-    
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<!-- probando -->
 <h:head>
-    <title>Menú Lacteos</title>
-    <link rel="stylesheet" type="text/css"
-        href="#{request.contextPath}/css/styles.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+	<title>Menú Lacteos</title>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/styles.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
 </h:head>
-
 <h:body>
-    <div class="card animate__animated animate__fadeIn">
-        <h:form>
-            <p:megaMenu orientation="horizontal" autoDisplay="false"
-                styleClass="ui-megamenu">
-                <f:facet name="start">
-                    <img src="resources/media/logo.png" width="150" class="animate__animated animate__bounce" />
-                </f:facet>
-                <p:menuitem icon="fa-solid fa-house" outcome="index" />
-                <p:submenu label="Mercado" icon="fa-solid fa-bowl-food">
-                    <p:column>
-                        <p:submenu>
-                            <p:menuitem value="Lacteos" icon="fa-solid fa-cow" outcome="lacteos" />
-                            <p:menuitem value="Carnes" icon="fa-regular fa-steak" outcome="carnes" />
-                        </p:submenu>
-                    </p:column>
-                </p:submenu>
-                <p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger" outcome="ropa">
-                    <p:column>
-                        <p:submenu>
-                            <p:menuitem value="Hombre" outcome="ropa" />
-                            <p:menuitem value="Mujer" outcome="ropa" />
-                            <p:menuitem value="Niño" outcome="ropa" />
-                        </p:submenu>
-                    </p:column>
-                </p:submenu>
-                <p:menuitem value="Juguetes" icon="fa-solid fa-gamepad" outcome="juguetes" />
-                <f:facet name="end">
-                    <div class="ui-input-icon-left mr-2">
-                        <i class="pi pi-fw pi-search" />
-                        <p:inputText placeholder="Search" />
-                    </div>
-                    <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" />
-                </f:facet>
-            </p:megaMenu>
-        </h:form>
-    </div>
 
-    <h1 class="text-center animate__animated animate__fadeInDown">Tabla de producto: alimento lacteo</h1>
-    <hr />
-    <h:form id="form">
-        <p:growl id="msgs" showDetail="true" />
+	<div class="card">
+		<h:form>
+			<p:megaMenu orientation="horizontal" autoDisplay="false"
+				styleClass="ui-megamenu">
+				<f:facet name="start">
+					<img src="resources/media/logo.png" width="150" />
+				</f:facet>
+				<p:menuitem icon="fa-solid fa-house" outcome="index" />
+				<p:menuitem value="Carnes" icon="fa-solid fa-drumstick-bite"
+					outcome="carnes" />
+				<p:menuitem value="Lácteos" icon="fa-solid fa-cow" outcome="lacteos" />
+				<p:menuitem value="Ropa" icon="fa-solid fa-tshirt" outcome="ropa" />
+				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad"
+					outcome="juguetes" />
+				<f:facet name="end">
+					<div class="ui-input-icon-left mr-2">
+						<i class="pi pi-fw pi-search" />
+						<p:inputText placeholder="Search" />
+					</div>
+					<p:button value="Logout" icon="pi pi-fw pi-sign-out"
+						styleClass="ui-button-info" />
+				</f:facet>
+			</p:megaMenu>
+		</h:form>
+	</div>
 
-        <div class="card animate__animated animate__fadeInUp">
-            <h5 class="mt-0">Administrando lacteos</h5>
-            <p:tabView>
+	<h1>Tabla de producto: alimento lacteo</h1>
+	<hr />
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
 
-                <p:tab title="Crear">
-                    <h:panelGrid columns="2" style="width:100%">
-                        <h5>Precio:</h5>
-                        <h:inputText class="form-control" id="precio" value="#{AlimentoLacteoBean.precio}">
-                            <f:convertNumber doubleOnly="true" />
-                        </h:inputText>
-                        <h5>Cantidad:</h5>
-                        <h:inputText class="form-control" id="cantidad" value="#{AlimentoLacteoBean.cantidad}">
-                            <f:convertNumber doubleOnly="true" />
-                        </h:inputText>
-                        <h5>Nombre:</h5>
-                        <h:inputText class="form-control" id="nombre" value="#{AlimentoLacteoBean.nombre}" />
-                        <h5>Descripción:</h5>
-                        <h:inputText class="form-control" id="descripcion" value="#{AlimentoLacteoBean.descripcion}" />
-                        <h5>Imagen:</h5>
-                        <h:inputText class="form-control" id="imagen" value="#{AlimentoLacteoBean.imagen}" />
-                        <h5>Marca:</h5>
-                        <h:inputText class="form-control" id="marca" value="#{AlimentoLacteoBean.marca}" />
-                        <h5>Tipo:</h5>
-                        <h:inputText class="form-control" id="tipo" value="#{AlimentoLacteoBean.tipo}" />
-                    </h:panelGrid>
-                    <p:commandButton class="ui-button-primary" action="#{AlimentoLacteoBean.save}" value="Save" update="@form" />
-                </p:tab>
+		<div class="card">
+			<h5 class="mt-0">Administrando lacteos</h5>
+			<p:tabView>
 
-                <p:tab title="Eliminar">
-                    <p:dataTable var="lacteo" value="#{AlimentoLacteoBean.list}" selectionMode="single" selection="#{AlimentoLacteoBean.selected}" rowKey="#{lacteo.nombre}" style="width:100%">
-                        <p:column headerText="Nombre">
-                            <h:outputText value="#{lacteo.nombre}" />
-                        </p:column>
-                        <p:column headerText="Acciones">
-                            <p:commandButton value="Eliminar" action="#{AlimentoLacteoBean.delete(lacteo)}" update="@form" styleClass="ui-button-danger" />
-                        </p:column>
-                    </p:dataTable>
-                </p:tab>
+				<p:tab title="Crear">
+					<h:panelGrid columns="2" style="width:100%">
 
-                <p:tab title="Actualizar">
-                    <h:outputText value="Seleccione un alimento lacteo para actualizar:" />
-                    <p:dataTable var="lacteo" value="#{AlimentoLacteoBean.list}" selectionMode="single" selection="#{AlimentoLacteoBean.selected}" rowKey="#{lacteo.id}" style="width:100%">
-                        <p:column headerText="Nombre">
-                            <h:outputText value="#{lacteo.nombre}" />
-                        </p:column>
-                    </p:dataTable>
-                    <hr />
-                    <h:panelGrid columns="2" style="width:100%">
-                        <h5>Precio:</h5>
-                        <h:inputText id="precioEdit" class="form-control" value="#{AlimentoLacteoBean.selected.precio}" rendered="#{not empty AlimentoLacteoBean.selected}">
-                            <f:convertNumber integerOnly="true" />
-                        </h:inputText>
-                        <h5>Cantidad:</h5>
-                        <h:inputText id="cantidadEdit" class="form-control" value="#{AlimentoLacteoBean.selected.cantidad}" rendered="#{not empty AlimentoLacteoBean.selected}">
-                            <f:convertNumber integerOnly="true" />
-                        </h:inputText>
-                        <h5>Nombre:</h5>
-                        <h:inputText id="nombreEdit" class="form-control" value="#{AlimentoLacteoBean.selected.nombre}" rendered="#{not empty AlimentoLacteoBean.selected}" />
-                        <h5>Descripcion:</h5>
-                        <h:inputText id="descripcionEdit" class="form-control" value="#{AlimentoLacteoBean.selected.descripcion}" rendered="#{not empty AlimentoLacteoBean.selected}" />
-                        <h5>Imagen:</h5>
-                        <h:inputText id="imagenEdit" class="form-control" value="#{AlimentoLacteoBean.selected.imagen}" rendered="#{not empty AlimentoLacteoBean.selected}" />
-                        <h5>Marca:</h5>
-                        <h:inputText id="marcaEdit" class="form-control" value="#{AlimentoLacteoBean.selected.marca}" rendered="#{not empty AlimentoLacteoBean.selected}" />
-                        <h5>Tipo:</h5>
-                        <h:inputText id="tipoEdit" class="form-control" value="#{AlimentoLacteoBean.selected.tipo}" rendered="#{not empty AlimentoLacteoBean.selected}" />
-                    </h:panelGrid>
-                    <p:commandButton value="Seleccionar alimento Lacteo" action="#{AlimentoLacteoBean.action}" rendered="#{AlimentoLacteoBean.button}" update="@form" styleClass="ui-button-primary" />
-                    <p:commandButton value="Actualizar" action="#{AlimentoLacteoBean.update}" update="@form" styleClass="ui-button-primary" />
-                </p:tab>
+						<h5>Precio:</h5>
+						<h:inputText class="form-control" id="precio"
+							value="#{AlimentoLacteoBean.precio}">
+							<f:convertNumber doubleOnly="true" />
+						</h:inputText>
 
-                <p:tab title="Mostrar">
-                    <p:dataTable var="lacteo" value="#{AlimentoLacteoBean.list}" style="width:100%">
-                        <p:column headerText="Id">
-                            <h:outputText value="#{lacteo.id}" />
-                        </p:column>
-                        <p:column headerText="Precio">
-                            <h:outputText value="#{lacteo.precio}" />
-                        </p:column>
-                        <p:column headerText="Cantidad">
-                            <h:outputText value="#{lacteo.cantidad}" />
-                        </p:column>
-                        <p:column headerText="Nombre">
-                            <h:outputText value="#{lacteo.nombre}" />
-                        </p:column>
-                        <p:column headerText="Descripcion">
-                            <h:outputText value="#{lacteo.descripcion}" />
-                        </p:column>
-                        <p:column headerText="Imagen">
-                            <h:graphicImage value="#{lacteo.imagen}" alt="Imagen del lacteo" width="100" height="100" />
-                        </p:column>
-                        <p:column headerText="Marca">
-                            <h:outputText value="#{lacteo.marca}" />
-                        </p:column>
-                        <p:column headerText="Tipo">
-                            <h:outputText value="#{lacteo.tipo}" />
-                        </p:column>
-                    </p:dataTable>
-                </p:tab>
-            </p:tabView>
-        </div>
-    </h:form>
+
+						<h5>Cantidad:</h5>
+						<h:inputText class="form-control" id="cantidad"
+							value="#{AlimentoLacteoBean.cantidad}">
+							<f:convertNumber doubleOnly="true" />
+						</h:inputText>
+
+
+						<h5>Nombre:</h5>
+						<h:inputText class="form-control" id="nombre"
+							value="#{AlimentoLacteoBean.nombre}" />
+
+						<h5>Descripción:</h5>
+						<h:inputText class="form-control" id="descripcion"
+							value="#{AlimentoLacteoBean.descripcion}" />
+
+						<h5>Imagen:</h5>
+						<h:inputText class="form-control" id="imagen"
+							value="#{AlimentoLacteoBean.imagen}" />
+
+						<h5>Marca:</h5>
+						<h:inputText class="form-control" id="marca"
+							value="#{AlimentoLacteoBean.marca}" />
+
+						<h5>Tipo:</h5>
+						<h:inputText class="form-control" id="tipo"
+							value="#{AlimentoLacteoBean.tipo}" />
+					</h:panelGrid>
+
+					<p:commandButton class="ui-button-primary"
+						action="#{AlimentoLacteoBean.save}" value="Save" update="@form" />
+				</p:tab>
+
+				<!-- TAB ELIMINAR -->
+				<p:tab title="Eliminar">
+					<p:dataTable var="lacteo" value="#{AlimentoLacteoBean.list}"
+						selectionMode="single" selection="#{AlimentoLacteoBean.selected}"
+						rowKey="#{lacteo.nombre}" style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{lacteo.nombre}" />
+						</p:column>
+						<p:column headerText="Acciones">
+							<p:commandButton value="Eliminar"
+								action="#{AlimentoLacteoBean.delete(lacteo)}" update="@form"
+								styleClass="ui-button-danger" />
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+
+				<!-- TAB ACTUALIZAR -->
+				<p:tab title="Actualizar">
+					<h:outputText
+						value="Seleccione un alimento carnico para actualizar:" />
+					<p:dataTable var="lacteo" value="#{AlimentoLacteoBean.list}"
+						selectionMode="single" selection="#{AlimentoLacteoBean.selected}"
+						rowKey="#{lacteo.id}" style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{lacteo.nombre}" />
+						</p:column>
+					</p:dataTable>
+					<hr></hr>
+
+					<!-- FORMULARIO DE EDICIÓN -->
+					<h:panelGrid columns="2" style="width:100%">
+
+						<h5>Precio:</h5>
+						<h:inputText id="precioEdit" class="form-control"
+							value="#{AlimentoLacteoBean.selected.precio}"
+							rendered="#{not empty AlimentoLacteoBean.selected}">
+							<f:convertNumber integerOnly="true" />
+						</h:inputText>
+
+						<h5>Cantidad:</h5>
+						<h:inputText id="cantidadEdit" class="form-control"
+							value="#{AlimentoLacteoBean.selected.cantidad}"
+							rendered="#{not empty AlimentoLacteoBean.selected}">
+							<f:convertNumber integerOnly="true" />
+						</h:inputText>
+
+						<h5>Nombre:</h5>
+						<h:inputText id="nombreEdit" class="form-control"
+							value="#{AlimentoLacteoBean.selected.nombre}"
+							rendered="#{not empty AlimentoLacteoBean.selected}" />
+
+						<h5>Descripcion:</h5>
+						<h:inputText id="descripcionEdit" class="form-control"
+							value="#{AlimentoLacteoBean.selected.descripcion}"
+							rendered="#{not empty AlimentoLacteoBean.selected}" />
+
+						<h5>Imagen:</h5>
+						<h:inputText id="imagenEdit" class="form-control"
+							value="#{AlimentoLacteoBean.selected.imagen}"
+							rendered="#{not empty AlimentoLacteoBean.selected}" />
+
+						<h5>Marca:</h5>
+						<h:inputText id="marcaEdit" class="form-control"
+							value="#{AlimentoLacteoBean.selected.marca}"
+							rendered="#{not empty AlimentoLacteoBean.selected}" />
+
+						<h5>Tipo:</h5>
+						<h:inputText id="tipoEdit" class="form-control"
+							value="#{AlimentoLacteoBean.selected.tipo}"
+							rendered="#{not empty AlimentoLacteoBean.selected}" />
+
+
+					</h:panelGrid>
+
+					<p:commandButton value="Seleccionar alimento Lacteo"
+						action="#{AlimentoLacteoBean.action}"
+						rendered="#{AlimentoLacteoBean.button}" update="@form"
+						styleClass="ui-button-primary" />
+
+					<p:commandButton value="Actualizar"
+						action="#{AlimentoLacteoBean.update}" update="@form"
+						styleClass="ui-button-primary" />
+				</p:tab>
+
+				<!-- TAB MOSTRAR -->
+				<p:tab title="Mostrar">
+					<p:dataTable var="lacteo" value="#{AlimentoLacteoBean.list}"
+						style="width:100%">
+						<p:column headerText="Id">
+							<h:outputText value="#{lacteo.id}" />
+						</p:column>
+
+						<p:column headerText="Precio">
+							<h:outputText value="#{lacteo.precio}" />
+						</p:column>
+
+						<p:column headerText="Cantidad">
+							<h:outputText value="#{lacteo.cantidad}" />
+						</p:column>
+
+						<p:column headerText="Nombre">
+							<h:outputText value="#{lacteo.nombre}" />
+						</p:column>
+
+						<p:column headerText="Descripcion">
+							<h:outputText value="#{lacteo.descripcion}" />
+						</p:column>
+
+						<p:column headerText="Imagen">
+								<h:graphicImage value="#{lacteo.imagen}"
+									alt="Imagen de la película" width="100" height="100" />
+							</p:column>
+
+						<p:column headerText="Marca">
+							<h:outputText value="#{lacteo.marca}" />
+						</p:column>
+
+						<p:column headerText="Tipo">
+							<h:outputText value="#{lacteo.tipo}" />
+						</p:column>
+
+
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+		</div>
+	</h:form>
+
+
 </h:body>
 </html>
