@@ -22,7 +22,7 @@ public class JugueteDTO extends Producto implements Serializable {
 		this.material = material;
 	}
 
-	public JugueteDTO(int id, double precio, int cantidad, String nombre, String descripcion, String imagen,
+	public JugueteDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen,
 			String tipo, String marca, int edadRecomendada, String material) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		this.tipo = tipo;
@@ -31,7 +31,7 @@ public class JugueteDTO extends Producto implements Serializable {
 		this.material = material;
 	}
 
-	public JugueteDTO(int id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
+	public JugueteDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		// TODO Auto-generated constructor stub
 	}
@@ -70,8 +70,8 @@ public class JugueteDTO extends Producto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "JugueteDTO [tipo=" + tipo + ", marca=" + marca + ", edadRecomendada=" + edadRecomendada + ", material="
-				+ material + "]";
+		return super.toString() + "JugueteDTO [tipo=" + tipo + ", marca=" + marca + ", edadRecomendada="
+				+ edadRecomendada + ", material=" + material + "]";
 	}
 
 }

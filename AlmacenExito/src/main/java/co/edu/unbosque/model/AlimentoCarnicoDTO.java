@@ -8,30 +8,28 @@ public class AlimentoCarnicoDTO extends Producto implements Serializable {
 	private String animalOrigen;
 	private double peso;
 	private boolean esProcesada;
-	private String fechaExpiracion;
 
 	public AlimentoCarnicoDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlimentoCarnicoDTO(String animalOrigen, double peso, boolean esProcesada, String fechaExpiracion) {
+	public AlimentoCarnicoDTO(String animalOrigen, double peso, boolean esProcesada) {
 		super();
 		this.animalOrigen = animalOrigen;
 		this.peso = peso;
 		this.esProcesada = esProcesada;
-		this.fechaExpiracion = fechaExpiracion;
 	}
 
-	public AlimentoCarnicoDTO(int id, double precio, int cantidad, String nombre, String descripcion, String imagen,
-			String animalOrigen, double peso, boolean esProcesada, String fechaExpiracion) {
+	public AlimentoCarnicoDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen,
+			String animalOrigen, double peso, boolean esProcesada) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		this.animalOrigen = animalOrigen;
 		this.peso = peso;
 		this.esProcesada = esProcesada;
-		this.fechaExpiracion = fechaExpiracion;
 	}
 
-	public AlimentoCarnicoDTO(int id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
+	public AlimentoCarnicoDTO(String id, double precio, int cantidad, String nombre, String descripcion,
+			String imagen) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		// TODO Auto-generated constructor stub
 	}
@@ -60,22 +58,14 @@ public class AlimentoCarnicoDTO extends Producto implements Serializable {
 		this.esProcesada = esProcesada;
 	}
 
-	public String getFechaExpiracion() {
-		return fechaExpiracion;
-	}
-
-	public void setFechaExpiracion(String fechaExpiracion) {
-		this.fechaExpiracion = fechaExpiracion;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "AlimentoCarnicoDTO [animalOrigen=" + animalOrigen + ", peso=" + peso + ", esProcesada=" + esProcesada
-				+ ", fechaExpiracion=" + fechaExpiracion + "]";
+		return super.toString() + "AlimentoCarnicoDTO [animalOrigen=" + animalOrigen + ", peso=" + peso
+				+ ", esProcesada=" + esProcesada;
 	}
 
 }

@@ -24,11 +24,11 @@
 			<p:megaMenu orientation="horizontal" autoDisplay="false"
 				styleClass=".ui-megamenu">
 				<f:facet name="start">
-					<img src="resources/media/logo.png" width="150"	 />
+					<img src="resources/media/logo.png" width="150" />
 
 				</f:facet>
-				
-				<p:menuitem icon="fa-solid fa-house" outcome="index"/>
+
+				<p:menuitem icon="fa-solid fa-house" outcome="index" />
 
 				<p:submenu label="Mercado" icon="fa-solid fa-bowl-food">
 					<p:column>
@@ -39,19 +39,21 @@
 					</p:column>
 
 				</p:submenu>
-				
-				<p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger" outcome="ropa">
+
+				<p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger"
+					outcome="ropa">
 					<p:column>
-						<p:submenu >
+						<p:submenu>
 							<p:menuitem value="Hombre" outcome="ropa" />
-							<p:menuitem value="Mujer" outcome="ropa"/>
-							<p:menuitem value="Niño" outcome="ropa"/>
+							<p:menuitem value="Mujer" outcome="ropa" />
+							<p:menuitem value="Niño" outcome="ropa" />
 						</p:submenu>
 					</p:column>
 				</p:submenu>
-				
-				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad" outcome="juguetes"/>
-				
+
+				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad"
+					outcome="juguetes" />
+
 				<f:facet name="end">
 					<div class="ui-input-icon-left mr-2">
 						<i class="pi pi-fw pi-search" />
@@ -60,10 +62,232 @@
 					<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 						styleClass="ui-button-info" />
 				</f:facet>
-				
+
 			</p:megaMenu>
 		</h:form>
 	</div>
+
+	<h1>Tabla de Alimentos Carnicos</h1>
+	<hr />
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<div class="card">
+			<h5 class="mt-0">Gestión de Alimentos Carnicos</h5>
+			<p:tabView>
+				<!-- TAB CREAR -->
+				<p:tab title="Crear">
+					<h:panelGrid columns="2" style="width:100%">
+
+						<!-- MI PRECIO ES UN DOUBLE -->
+						<h5>Precio:</h5>
+						<h:inputText class="form-control" id="precio"
+							value="#{AlimentoCarnicoBean.precio}">
+							<f:convertNumber doubleOnly="true" />
+						</h:inputText>
+
+
+						<!-- MI CANTIDAD ES UN ENTERO-->
+						<h5>Cantidad:</h5>
+						<h:inputText class="form-control" id="cantidad"
+							value="#{AlimentoCarnicoBean.cantidad}" />
+
+						<h5>Nombre:</h5>
+						<h:inputText class="form-control" id="nombre"
+							value="#{AlimentoCarnicoBean.nombre}" />
+
+						<h5>Descripción:</h5>
+						<h:inputText class="form-control" id="descripcion"
+							value="#{AlimentoCarnicoBean.descripcion}" />
+
+						<h5>Imagen:</h5>
+						<h:inputText class="form-control" id="imagen"
+							value="#{AlimentoCarnicoBean.imagen}" />
+
+						<div class="ui-fluid formgrid grid">
+							<div class="field col-12 md:col-4">
+								<h5>Animal de origen:</h5>
+								<p:selectOneMenu id="option"
+									value="#{AlimentoCarnicoBean.animalOrigen}">
+									<f:selectItem itemLabel="Selecciona una" itemValue="" />
+									<f:selectItem itemLabel="Res" itemValue="Res" />
+									<f:selectItem itemLabel="Cerdo" itemValue="Cerdo" />
+									<f:selectItem itemLabel="Pollo" itemValue="Pollo" />
+									<f:selectItem itemLabel="Cordero" itemValue="Cordero" />
+									<f:selectItem itemLabel="Pescado" itemValue="Pescado" />
+									<f:selectItem itemLabel="Conejo" itemValue="Conejo" />
+									<f:selectItem itemLabel="Pato" itemValue="Pato" />
+									<f:facet name="footer">
+										<p:divider styleClass="mt-0" />
+										<h:outputText value="7 opciones" style="font-weight:bold;" />
+									</f:facet>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<!-- MI PESO ES UN DOUBLE-->
+						<h5>Peso:</h5>
+						<h:inputText class="form-control" id="peso"
+							value="#{AlimentoCarnicoBean.peso}" />
+
+						<h5>Es procesada?</h5>
+						<h:selectBooleanCheckbox id="procesada"
+							value="#{AlimentoCarnicoBean.esProcesada}" />
+
+					</h:panelGrid>
+
+					<p:commandButton class="ui-button-primary"
+						action="#{AlimentoCarnicoBean.save}" value="Save" update="@form" />
+				</p:tab>
+
+				<!-- TAB ELIMINAR -->
+				<p:tab title="Eliminar">
+					<p:dataTable var="carnico" value="#{AlimentoCarnicoBean.list}"
+						selectionMode="single" selection="#{AlimentoCarnicoBean.selected}"
+						rowKey="#{carnico.nombre}" style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{carnico.nombre}" />
+						</p:column>
+						<p:column headerText="Acciones">
+							<p:commandButton value="Eliminar"
+								action="#{AlimentoCarnicoBean.delete(carnico)}" update="@form"
+								styleClass="ui-button-danger" />
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+
+				<!-- TAB ACTUALIZAR -->
+				<p:tab title="Actualizar">
+					<h:outputText
+						value="Seleccione un alimento carnico para actualizar:" />
+					<p:dataTable var="carnico" value="#{AlimentoCarnicoBean.list}"
+						selectionMode="single" selection="#{AlimentoCarnicoBean.selected}"
+						rowKey="#{carnico.id}" style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{carnico.nombre}" />
+						</p:column>
+					</p:dataTable>
+					<hr></hr>
+
+					<!-- FORMULARIO DE EDICIÓN -->
+					<h:panelGrid columns="2" style="width:100%">
+
+						<h5>Precio:</h5>
+						<h:inputText id="precioEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.precio}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}">
+							<f:convertNumber integerOnly="true" />
+						</h:inputText>
+
+						<h5>Cantidad:</h5>
+						<h:inputText id="cantidadEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.cantidad}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+						<h5>Nombre:</h5>
+						<h:inputText id="nombreEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.nombre}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+						<h5>Descripcion:</h5>
+						<h:inputText id="descripcionEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.descripcion}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+						<h5>Imagen:</h5>
+						<h:inputText id="imagenEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.imagen}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+						<div class="ui-fluid formgrid grid">
+							<div class="field col-12 md:col-4">
+								<h5>Animal origen:</h5>
+								<p:selectOneMenu id="optionUpd"
+									value="#{AlimentoCarnicoBean.selected.animalOrigen}"
+									rendered="#{not empty AlimentoCarnicoBean.selected}">
+									<f:selectItem itemLabel="Selecciona una" itemValue="" />
+									<f:selectItem itemLabel="Res" itemValue="Res" />
+									<f:selectItem itemLabel="Cerdo" itemValue="Cerdo" />
+									<f:selectItem itemLabel="Pollo" itemValue="Pollo" />
+									<f:selectItem itemLabel="Cordero" itemValue="Cordero" />
+									<f:selectItem itemLabel="Pescado" itemValue="Pescado" />
+									<f:selectItem itemLabel="Conejo" itemValue="Conejo" />
+									<f:selectItem itemLabel="Pato" itemValue="Pato" />
+									<f:facet name="footer">
+										<p:divider styleClass="mt-0" />
+										<h:outputText value="7 opciones" style="font-weight:bold;" />
+									</f:facet>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<h5>Peso:</h5>
+						<h:inputText id="pesoEdit" class="form-control"
+							value="#{AlimentoCarnicoBean.selected.peso}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+						<h5>Es procesada?</h5>
+						<h:selectBooleanCheckbox id="procesadaEdit"
+							value="#{AlimentoCarnicoBean.selected.esProcesada}"
+							rendered="#{not empty AlimentoCarnicoBean.selected}" />
+
+					</h:panelGrid>
+
+					<p:commandButton value="Seleccionar alimento Carnico"
+						action="#{AlimentoCarnicoBean.action}"
+						rendered="#{AlimentoCarnicoBean.checkButton}" update="@form"
+						styleClass="ui-button-primary" />
+
+					<p:commandButton value="Actualizar"
+						action="#{AlimentoCarnicoBean.update}" update="@form"
+						styleClass="ui-button-primary" />
+				</p:tab>
+
+				<!-- TAB MOSTRAR -->
+				<p:tab title="Mostrar">
+					<p:dataTable var="carnico" value="#{AlimentoCarnicoBean.list}"
+						style="width:100%">
+						<p:column headerText="Id">
+							<h:outputText value="#{carnico.id}" />
+						</p:column>
+
+						<p:column headerText="Precio">
+							<h:outputText value="#{carnico.precio}" />
+						</p:column>
+
+						<p:column headerText="Cantidad">
+							<h:outputText value="#{carnico.cantidad}" />
+						</p:column>
+
+						<p:column headerText="Nombre">
+							<h:outputText value="#{carnico.nombre}" />
+						</p:column>
+
+						<p:column headerText="Descripcion">
+							<h:outputText value="#{carnico.descripcion}" />
+						</p:column>
+
+						<p:column headerText="Imagen">
+							<h:outputText value="#{carnico.imagen}" />
+						</p:column>
+
+						<p:column headerText="Animal Origen">
+							<h:outputText value="#{carnico.animalOrigen}" />
+						</p:column>
+
+						<p:column headerText="Peso">
+							<h:outputText value="#{carnico.peso}" />
+						</p:column>
+
+						<p:column headerText="Es procesada">
+							<h:outputText value="#{carnico.esProcesada}" />
+						</p:column>
+
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+		</div>
+	</h:form>
 
 </h:body>
 </html>

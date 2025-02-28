@@ -8,30 +8,27 @@ public class AlimentoLacteoDTO extends Producto implements Serializable {
 	private String marca;
 	private boolean esLactoso;
 	private String tipo;
-	private String fechaExpiracion;
 
 	public AlimentoLacteoDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlimentoLacteoDTO(String marca, boolean esLactoso, String tipo, String fechaExpiracion) {
+	public AlimentoLacteoDTO(String marca, boolean esLactoso, String tipo) {
 		super();
 		this.marca = marca;
 		this.esLactoso = esLactoso;
 		this.tipo = tipo;
-		this.fechaExpiracion = fechaExpiracion;
 	}
 
-	public AlimentoLacteoDTO(int id, double precio, int cantidad, String nombre, String descripcion, String imagen,
-			String marca, boolean esLactoso, String tipo, String fechaExpiracion) {
+	public AlimentoLacteoDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen,
+			String marca, boolean esLactoso, String tipo) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		this.marca = marca;
 		this.esLactoso = esLactoso;
 		this.tipo = tipo;
-		this.fechaExpiracion = fechaExpiracion;
 	}
 
-	public AlimentoLacteoDTO(int id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
+	public AlimentoLacteoDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		// TODO Auto-generated constructor stub
 	}
@@ -60,22 +57,14 @@ public class AlimentoLacteoDTO extends Producto implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public String getFechaExpiracion() {
-		return fechaExpiracion;
-	}
-
-	public void setFechaExpiracion(String fechaExpiracion) {
-		this.fechaExpiracion = fechaExpiracion;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "AlimentoLacteoDTO [marca=" + marca + ", esLactoso=" + esLactoso + ", tipo=" + tipo
-				+ ", fechaExpiracion=" + fechaExpiracion + "]";
+		return super.toString() + "AlimentoLacteoDTO [marca=" + marca + ", esLactoso=" + esLactoso + ", tipo=" + tipo
+				+ "]";
 	}
 
 }

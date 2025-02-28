@@ -22,8 +22,8 @@ public class RopaDTO extends Producto implements Serializable {
 		this.material = material;
 	}
 
-	public RopaDTO(int id, double precio, int cantidad, String nombre, String descripcion, String imagen, String size,
-			String color, String brand, String material) {
+	public RopaDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen,
+			String size, String color, String brand, String material) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		this.size = size;
 		this.color = color;
@@ -31,7 +31,7 @@ public class RopaDTO extends Producto implements Serializable {
 		this.material = material;
 	}
 
-	public RopaDTO(int id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
+	public RopaDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		// TODO Auto-generated constructor stub
 	}
@@ -74,7 +74,8 @@ public class RopaDTO extends Producto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\nTalla= " + size + "\nColor= " + color + "\nMarca= " + brand + "\nMaterial= " + material;
+		return super.toString() + "\nTalla= " + size + "\nColor= " + color + "\nMarca= " + brand + "\nMaterial= "
+				+ material;
 	}
 
 }
