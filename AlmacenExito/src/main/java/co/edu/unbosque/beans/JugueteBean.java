@@ -46,7 +46,7 @@ public class JugueteBean implements Serializable {
 
 		jDAO.crear(new JugueteDTO(id, precio, cantidad, nombre, descripcion, imagen, tipo, marca));
 
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto Agregado exitosamente"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto agregado exitosamente."));
 
 	}
 
