@@ -75,32 +75,32 @@
 
 						<h5>Precio:</h5>
 						<h:inputText class="form-control" id="precio"
-							value="#{jugueteBean.precio}">
+							value="#{JugueteBean.precio}">
 							<f:convertNumber doubleOnly="true" />
 						</h:inputText>
 
 
 						<h5>Cantidad:</h5>
 						<h:inputText class="form-control" id="cantidad"
-							value="#{jugueteBean.cantidad}" />
+							value="#{JugueteBean.cantidad}" />
 
 						<h5>Nombre:</h5>
 						<h:inputText class="form-control" id="nombre"
-							value="#{jugueteBean.nombre}" />
+							value="#{JugueteBean.nombre}" />
 
 						<h5>Descripción:</h5>
 						<h:inputText class="form-control" id="descripcion"
-							value="#{jugueteBean.descripcion}" />
+							value="#{JugueteBean.descripcion}" />
 
 						<h5>Imagen:</h5>
 						<h:inputText class="form-control" id="imagen"
-							value="#jugueteBean.imagen}" />
+							value="#{JugueteBean.imagen}" />
 
 						<div class="ui-fluid formgrid grid">
 							<div class="field col-12 md:col-4">
 								<h5>Tipo:</h5>
 								<p:selectOneMenu id="tipo"
-									value="#{jugueteBean.animalOrigen}">
+									value="#{JugueteBean.tipo}">
 									<f:selectItem itemLabel="Selecciona una" itemValue="" />
 									<f:selectItem itemLabel="Juguetes de construcción" itemValue="Res" />
 									<f:selectItem itemLabel="Juguetes educativos" itemValue="Cerdo" />
@@ -115,7 +115,7 @@
 								
 								<h5>Marca:</h5>
 								<p:selectOneMenu id="marca"
-									value="#{jugueteBean.animalOrigen}">
+									value="#{JugueteBean.marca}">
 									<f:selectItem itemLabel="Selecciona una" itemValue="" />
 									<f:selectItem itemLabel="LEGO" itemValue="Res" />
 									<f:selectItem itemLabel="Sony PlayStation" itemValue="Cerdo" />
@@ -134,20 +134,20 @@
 					</h:panelGrid>
 
 					<p:commandButton class="ui-button-primary"
-						action="#{jugeteBean.save}" value="Save" update="@form" />
+						action="#{JugueteBean.save}" value="Save" update="@form" />
 				</p:tab>
 
 				<!-- TAB ELIMINAR -->
 				<p:tab title="Eliminar">
-					<p:dataTable var="juguete" value="#{jugeteBean.list}"
-						selectionMode="single" selection="#{jugeteBean.selected}"
+					<p:dataTable var="juguete" value="#{JugueteBean.listj}"
+						selectionMode="single" selection="#{JugueteBean.selected}"
 						rowKey="#{juguete.nombre}" style="width:100%">
 						<p:column headerText="Nombre">
 							<h:outputText value="#{juguete.nombre}" />
 						</p:column>
 						<p:column headerText="Acciones">
 							<p:commandButton value="Eliminar"
-								action="#{jugeteBean.delete(juguete)}" update="@form"
+								action="#{JugueteBean.delete(juguete)}" update="@form"
 								styleClass="ui-button-danger" />
 						</p:column>
 					</p:dataTable>
@@ -156,12 +156,12 @@
 				<!-- TAB ACTUALIZAR -->
 				<p:tab title="Actualizar">
 					<h:outputText
-						value="Seleccione un alimento carnico para actualizar:" />
-					<p:dataTable var="carnico" value="#{jugeteBean.list}"
-						selectionMode="single" selection="#{jugeteBean.selected}"
+						value="Seleccione un juguete para actualizar:" />
+					<p:dataTable var="juguete" value="#{JugueteBean.listj}"
+						selectionMode="single" selection="#{JugueteBean.selected}"
 						rowKey="#{juguete.id}" style="width:100%">
 						<p:column headerText="Nombre">
-							<h:outputText value="#{carnico.nombre}" />
+							<h:outputText value="#{juguete.nombre}" />
 						</p:column>
 					</p:dataTable>
 					<hr></hr>
@@ -171,38 +171,38 @@
 
 						<h5>Precio:</h5>
 						<h:inputText id="precioEdit" class="form-control"
-							value="#{AlimentoCarnicoBean.selected.precio}"
-							rendered="#{not empty jugueteBean.selected}">
+							value="#{JugueteBean.selected.precio}"
+							rendered="#{not empty JugueteBean.selected}">
 							<f:convertNumber integerOnly="true" />
 						</h:inputText>
 
 						<h5>Cantidad:</h5>
 						<h:inputText id="cantidadEdit" class="form-control"
-							value="#{jugeteBean.selected.cantidad}"
-							rendered="#{not empty jugeteBean.selected}">
+							value="#{JugueteBean.selected.cantidad}"
+							rendered="#{not empty JugueteBean.selected}">
 							<f:convertNumber integerOnly="true" />
 						</h:inputText>
 
 						<h5>Nombre:</h5>
 						<h:inputText id="nombreEdit" class="form-control"
-							value="#{jugeteBean.selected.nombre}"
-							rendered="#{not empty jugeteBean.selected}" />
+							value="#{JugueteBean.selected.nombre}"
+							rendered="#{not empty JugueteBean.selected}" />
 
 						<h5>Descripcion:</h5>
 						<h:inputText id="descripcionEdit" class="form-control"
-							value="#{jugeteBean.selected.descripcion}"
-							rendered="#{not empty jugeteBean.selected}" />
+							value="#{JugueteBean.selected.descripcion}"
+							rendered="#{not empty JugueteBean.selected}" />
 
 						<h5>Imagen:</h5>
 						<h:inputText id="imagenEdit" class="form-control"
-							value="#{jugeteBean.selected.imagen}"
-							rendered="#{not empty jugeteBean.selected}" />
+							value="#{JugueteBean.selected.imagen}"
+							rendered="#{not empty JugueteBean.selected}" />
 
 						<div class="ui-fluid formgrid grid">
 							<div class="field col-12 md:col-4">
 								<h5>Tipo:</h5>
 								<p:selectOneMenu id="Tipo"
-									value="#{jugueteBean.tipo}">
+									value="#{JugueteBean.tipo}">
 									<f:selectItem itemLabel="Selecciona una" itemValue="" />
 									<f:selectItem itemLabel="Juguetes de construcción" itemValue="Res" />
 									<f:selectItem itemLabel="Juguetes educativos" itemValue="Cerdo" />
@@ -217,7 +217,7 @@
 								
 								<h5>Marca:</h5>
 								<p:selectOneMenu id="Marca"
-									value="#{jugueteBean.marca}">
+									value="#{JugueteBean.marca}">
 									<f:selectItem itemLabel="Selecciona una" itemValue="" />
 									<f:selectItem itemLabel="LEGO" itemValue="Res" />
 									<f:selectItem itemLabel="Sony PlayStation" itemValue="Cerdo" />
@@ -232,28 +232,23 @@
 							</div>
 						</div>
 
-						<h5>Peso:</h5>
-						<h:inputText id="pesoEdit" class="form-control"
-							value="#{jugueteBean.selected.peso}"
-							rendered="#{not empty jugueteBean.selected}" />
-
-
+				
 
 					</h:panelGrid>
 
 					<p:commandButton value="Seleccionar juguete"
-						action="#{jugueteBean.action}"
-						rendered="#{jugueteBean.button}" update="@form"
+						action="#{JugueteBean.action}"
+						rendered="#{JugueteBean.button}" update="@form"
 						styleClass="ui-button-primary" />
 
 					<p:commandButton value="Actualizar"
-						action="#{jugueteBean.update}" update="@form"
+						action="#{JugueteBean.update}" update="@form"
 						styleClass="ui-button-primary" />
 				</p:tab>
 
 				<!-- TAB MOSTRAR -->
 				<p:tab title="Mostrar">
-					<p:dataTable var="juguete" value="#{jugueteBean.listj}"
+					<p:dataTable var="juguete" value="#{JugueteBean.listj}"
 						style="width:100%">
 						<p:column headerText="Id">
 							<h:outputText value="#{juguete.id}" />

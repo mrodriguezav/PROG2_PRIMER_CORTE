@@ -31,6 +31,7 @@ public class JugueteBean implements Serializable {
 	private String imagen;
 	private String tipo;
 	private String marca;
+	private boolean button = true;
 	private ArrayList<JugueteDTO> listj;
 	private JugueteDAO jDAO;
 	private JugueteDTO selected;
@@ -47,7 +48,7 @@ public class JugueteBean implements Serializable {
 		jDAO.crear(new JugueteDTO(id, precio, cantidad, nombre, descripcion, imagen, tipo, marca));
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto agregado exitosamente."));
-
+		cleanFields();
 	}
 
 	public void delete(JugueteDTO selected) {
@@ -96,6 +97,14 @@ public class JugueteBean implements Serializable {
 		this.tipo = "";
 		this.marca = "";
 	}
+	
+	public boolean checkButton() {
+		return button;
+	}
+	
+	public void action() {
+		button = false;
+	}
 
 	public String getId() {
 		return id;
@@ -123,6 +132,16 @@ public class JugueteBean implements Serializable {
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	
+	
+	public boolean isButton() {
+		return button;
+	}
+
+	public void setButton(boolean button) {
+		this.button = button;
 	}
 
 	public void setNombre(String nombre) {
