@@ -1,3 +1,7 @@
+/**
+ * Bean administrado para la gestión de objetos AlimentoLacteoDTO en una aplicación JSF.
+ * Proporciona métodos para crear, actualizar y eliminar productos.
+ */
 package co.edu.unbosque.beans;
 
 import java.io.Serializable;
@@ -12,15 +16,17 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
+/**
+ * Bean de gestion para AlimentoCarnicoDTO. Maneja operaciones CRUD y gestion de
+ * la lista de alimentos carnicos.
+ */
 @Named("AlimentoCarnicoBean")
 @SessionScoped
-
 public class AlimentoCarnicoBean implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+
+	// Atributos del alimento cárnico
 	private String id;
 	private int precio;
 	private int cantidad;
@@ -34,28 +40,35 @@ public class AlimentoCarnicoBean implements Serializable {
 	private AlimentoCarnicoDAO aDAO;
 	private AlimentoCarnicoDTO selected;
 
+	/**
+	 * Constructor que inicializa el DAO y obtiene la lista de productos.
+	 */
 	public AlimentoCarnicoBean() {
 		aDAO = new AlimentoCarnicoDAO();
 		selected = new AlimentoCarnicoDTO();
 		list = aDAO.getAll();
 	}
 
+	/**
+	 * Agrega un nuevo producto a la lista.
+	 */
 	public void save() {
 		String id = UUID.randomUUID().toString();
-
 		aDAO.crear(new AlimentoCarnicoDTO(id, precio, cantidad, nombre, descripcion, imagen, animalOrigen, peso));
-
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto Agregado exitosamente"));
-
 	}
 
+	/**
+	 * Elimina un producto seleccionado de la lista.
+	 * 
+	 * @param selected Producto a eliminar.
+	 */
 	public void delete(AlimentoCarnicoDTO selected) {
 		Iterator<AlimentoCarnicoDTO> iterator = list.iterator();
 		while (iterator.hasNext()) {
 			AlimentoCarnicoDTO u = iterator.next();
 			if (u.equals(selected)) {
 				iterator.remove();
-
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Producto eliminado correctamente"));
 				break;
@@ -63,28 +76,24 @@ public class AlimentoCarnicoBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Actualiza la informacion del producto seleccionado.
+	 */
 	public void update() {
 		if (selected != null) {
 			for (AlimentoCarnicoDTO u : list) {
 				if (u.equals(selected)) {
-					u.getId();
-					u.getPrecio();
-					u.getCantidad();
-					u.getNombre();
-					u.getDescripcion();
-					u.getImagen();
-					u.getAnimalOrigen();
-					u.getPeso();
-
 					FacesContext.getCurrentInstance().addMessage(null,
 							new FacesMessage("Producto actualizado correctamente"));
 					break;
 				}
 			}
 		}
-
 	}
 
+	/**
+	 * Limpia los campos de entrada.
+	 */
 	public void cleanFields() {
 		this.id = "";
 		this.precio = 0;
@@ -96,13 +105,23 @@ public class AlimentoCarnicoBean implements Serializable {
 		this.peso = 0;
 	}
 
+	/**
+	 * Verifica el estado del boton.
+	 * 
+	 * @return true si el boton esta activo, false en caso contrario.
+	 */
 	public boolean checkButton() {
 		return button;
 	}
 
+	/**
+	 * Cambia el estado del boton.
+	 */
 	public void action() {
 		button = false;
 	}
+
+	// Getters y Setters
 
 	public String getId() {
 		return id;
@@ -203,5 +222,4 @@ public class AlimentoCarnicoBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }

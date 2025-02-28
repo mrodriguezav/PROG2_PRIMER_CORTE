@@ -6,126 +6,233 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<!-- probando -->
-<h:head>
+	xmlns:p="http://primefaces.org/ui"> <!-- probando --> <h:head>
 	<title>Menú Ropa</title>
 	<link rel="stylesheet" type="text/css"
 		href="#{request.contextPath}/css/styles.css" />
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-</h:head>
-<h:body>
+</h:head> <h:body>
 
-	<div class="card">
-		<h:form>
-			<p:megaMenu orientation="horizontal" autoDisplay="false"
-				styleClass=".ui-megamenu">
-				<f:facet name="start">
-					<img src="resources/media/logo.png" width="150"	 />
+	<div class="card"> <h:form>
+		<p:megaMenu orientation="horizontal" autoDisplay="false"
+			styleClass=".ui-megamenu">
+			<f:facet name="start">
+				<img src="resources/media/logo.png" width="150" />
 
-				</f:facet>
-		<p:menuitem icon="fa-solid fa-house" outcome="index"/>
-				<p:submenu label="Mercado" icon="fa-solid fa-bowl-food">
-					<p:column>
-						<p:submenu>
-							<p:menuitem value="Lacteos" icon="fa-solid fa-cow" outcome="lacteos" />
-							<p:menuitem value="Carnes" icon="fa-regular fa-steak" outcome="carnes" />
-						</p:submenu>
+			</f:facet>
+
+			<p:menuitem icon="fa-solid fa-house" outcome="index" />
+
+			<p:submenu label="Mercado" icon="fa-solid fa-bowl-food">
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="Lacteos" icon="fa-solid fa-cow" />
+						<p:menuitem value="Carnes" icon="fa-regular fa-steak" />
+					</p:submenu>
+				</p:column>
+
+			</p:submenu>
+
+			<p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger"
+				outcome="ropa">
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="Hombre" outcome="ropa" />
+						<p:menuitem value="Mujer" outcome="ropa" />
+						<p:menuitem value="Niño" outcome="ropa" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad"
+				outcome="juguetes" />
+
+			<f:facet name="end">
+				<div class="ui-input-icon-left mr-2"> <i
+					class="pi pi-fw pi-search" /> <p:inputText placeholder="Search" />
+				</div>
+				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
+					styleClass="ui-button-info" />
+			</f:facet>
+
+		</p:megaMenu>
+	</h:form> </div>
+
+	<h1>Tabla de producto: Ropa</h1>
+	<hr />
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<div class="card"> <h5 class="mt-0">Administrando Ropa</h5> <p:tabView>
+
+			<p:tab title="Crear">
+				<h:panelGrid columns="2" style="width:100%">
+
+					<h5>Precio:</h5>
+					<h:inputText class="form-control" id="precio"
+						value="#{RopaBean.precio}">
+						<f:convertNumber doubleOnly="true" />
+					</h:inputText>
+
+
+					<h5>Cantidad:</h5>
+					<h:inputText class="form-control" id="cantidad"
+						value="#{RopaBean.cantidad}" />
+
+					<h5>Nombre:</h5>
+					<h:inputText class="form-control" id="nombre"
+						value="#{RopaBean.nombre}" />
+
+					<h5>Descripción:</h5>
+					<h:inputText class="form-control" id="descripcion"
+						value="#{RopaBean.descripcion}" />
+
+					<h5>Imagen:</h5>
+					<h:inputText class="form-control" id="imagen"
+						value="#{RopaBean.imagen}" />
+
+					<h5>Talla:</h5>
+					<h:inputText class="form-control" id="talla"
+						value="#{RopaBean.size}" />
+						
+					<h5>Color:</h5>
+					<h:inputText class="form-control" id="color"
+						value="#{RopaBean.color}" />
+
+				</h:panelGrid>
+
+				<p:commandButton class="ui-button-primary"
+					action="#{RopaBean.save}" value="Save" update="@form" />
+			</p:tab>
+
+			<!-- TAB ELIMINAR -->
+			<p:tab title="Eliminar">
+				<p:dataTable var="ropa" value="#{RopaBean.list}"
+					selectionMode="single" selection="#{RopaBean.selected}"
+					rowKey="#{ropa.nombre}" style="width:100%">
+					<p:column headerText="Nombre">
+						<h:outputText value="#{ropa.nombre}" />
+					</p:column>
+					<p:column headerText="Acciones">
+						<p:commandButton value="Eliminar"
+							action="#{RopaBean.delete(ropa)}" update="@form"
+							styleClass="ui-button-danger" />
+					</p:column>
+				</p:dataTable>
+			</p:tab>
+
+			<!-- TAB ACTUALIZAR -->
+			<p:tab title="Actualizar">
+				<h:outputText
+					value="Seleccione un alimento carnico para actualizar:" />
+				<p:dataTable var="ropa" value="#{RopaBean.list}"
+					selectionMode="single" selection="#{RopaBean.selected}"
+					rowKey="#{ropa.id}" style="width:100%">
+					<p:column headerText="Nombre">
+						<h:outputText value="#{ropa.nombre}" />
+					</p:column>
+				</p:dataTable>
+				<hr></hr>
+
+				<!-- FORMULARIO DE EDICIÓN -->
+				<h:panelGrid columns="2" style="width:100%">
+
+					<h5>Precio:</h5>
+					<h:inputText id="precioEdit" class="form-control"
+						value="#{RopaBean.selected.precio}"
+						rendered="#{not empty RopaBean.selected}">
+						<f:convertNumber integerOnly="true" />
+					</h:inputText>
+
+					<h5>Cantidad:</h5>
+					<h:inputText id="cantidadEdit" class="form-control"
+						value="#{RopaBean.selected.cantidad}"
+						rendered="#{not empty RopaBean.selected}">
+						<f:convertNumber integerOnly="true" />
+					</h:inputText>
+
+					<h5>Nombre:</h5>
+					<h:inputText id="nombreEdit" class="form-control"
+						value="#{RopaBean.selected.nombre}"
+						rendered="#{not empty RopaBean.selected}" />
+
+					<h5>Descripcion:</h5>
+					<h:inputText id="descripcionEdit" class="form-control"
+						value="#{RopaBean.selected.descripcion}"
+						rendered="#{not empty RopaBean.selected}" />
+
+					<h5>Imagen:</h5>
+					<h:inputText id="imagenEdit" class="form-control"
+						value="#{RopaBean.selected.imagen}"
+						rendered="#{not empty RopaBean.selected}" />
+
+					<h5>Talla:</h5>
+					<h:inputText id="tallaEdit" class="form-control"
+						value="#{RopaBean.selected.imagen}"
+						rendered="#{not empty RopaBean.selected}" />
+
+					<h5>Color:</h5>
+					<h:inputText id="colorEdit" class="form-control"
+						value="#{RopaBean.selected.imagen}"
+						rendered="#{not empty RopaBean.selected}" />
+
+
+
+				</h:panelGrid>
+
+				<p:commandButton value="Seleccionar prenda:"
+					action="#{RopaBean.action}"
+					rendered="#{RopaBean.button}" update="@form"
+					styleClass="ui-button-primary" />
+
+				<p:commandButton value="Actualizar"
+					action="#{RopaBean.update}" update="@form"
+					styleClass="ui-button-primary" />
+			</p:tab>
+
+			<!-- TAB MOSTRAR -->
+			<p:tab title="Mostrar">
+				<p:dataTable var="ropa" value="#{RopaBean.list}"
+					style="width:100%">
+					<p:column headerText="Id">
+						<h:outputText value="#{ropa.id}" />
 					</p:column>
 
-				</p:submenu>
-				
-				<p:submenu label="Ropa" icon="fa-solid fa-clothes-hanger" >
-					<p:column>
-						<p:submenu >
-							<p:menuitem value="Hombre" outcome="ropa" />
-							<p:menuitem value="Mujer" outcome="ropa"/>
-							<p:menuitem value="Niño" outcome="ropa"/>
-						</p:submenu>
+					<p:column headerText="Precio">
+						<h:outputText value="#{ropa.precio}" />
 					</p:column>
-				</p:submenu>
-				
-				<p:menuitem value="Juguetes" icon="fa-solid fa-gamepad" outcome="juguetes"/>
 
-				<f:facet name="end">
-					<div class="ui-input-icon-left mr-2">
-						<i class="pi pi-fw pi-search" />
-						<p:inputText placeholder="Search" />
-					</div>
-					<p:button value="Logout" icon="pi pi-fw pi-sign-out"
-						styleClass="ui-button-info" />
-				</f:facet>
-			</p:megaMenu>
-		</h:form>
-	</div>
-	
-	<div class="card">
-    <h:form id="form">
-        <p:dataTable id="products" var="product" value="#{userBean.products}" rowKey="#{product.id}"
-                     selection="#{userBean.selectedProduct}" selectionMode="single">
-            <f:facet name="header">
-            </f:facet>
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{ropa.cantidad}" />
+					</p:column>
 
-            <p:column headerText="Code">
-                <h:outputText value="#{product.code}" />
-            </p:column>
-            <p:column headerText="Name">
-                <h:outputText value="#{product.name}" />
-            </p:column>
-            <p:column headerText="Category">
-                <h:outputText value="#{product.category}" />
-            </p:column>
-            <p:column headerText="Quantity">
-                <h:outputText value="#{product.quantity}" />
-            </p:column>
-        </p:dataTable>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{ropa.nombre}" />
+					</p:column>
 
-        <p:contextMenu for="products">
-            <p:menuitem value="View" update="productDetail" icon="pi pi-search"
-                        oncomplete="PF('productDialog').show()" actionListener="#{userBean.viewProduct}"/>
-            <p:menuitem value="Delete" update="products" icon="pi pi-times"
-                        action="#{userBean.deleteProduct}"/>
-        </p:contextMenu>
+					<p:column headerText="Descripcion">
+						<h:outputText value="#{ropa.descripcion}" />
+					</p:column>
 
-        <p:dialog header="Product Info" widgetVar="productDialog" modal="true" showEffect="fade"
-                  hideEffect="fade" resizable="false">
-            <p:outputPanel id="productDetail" style="text-align:center;">
-                <p:column rendered="#{not empty userBean.selectedProduct}">
-                    <div class="product">
-                        <div class="product-grid-item border-0" style="margin-bottom: 0">
-                            <div class="product-grid-item-top">
-                                <div>
-                                    <i class="pi pi-tag product-category-icon"/>
-                                    <span class="product-category">#{userBean.selectedProduct.category}</span>
-                                </div>
-                                <span class="product-badge status-#{userBean.selectedProduct.inventoryStatus.name().toLowerCase()}">#{dtContextMenuView.selectedProduct.inventoryStatus.text}</span>
-                            </div>
-                            <div class="product-grid-item-content">
-                                <p:graphicImage
-                                        name="demo/images/product/#{userBean.selectedProduct.image}"/>
-                                <div class="product-name">#{userBean.selectedProduct.name}</div>
-                                <div class="product-description">#{userBean.selectedProduct.description}</div>
-                                <p:rating readonly="true" value="#{userBean.selectedProduct.rating}"/>
-                            </div>
-                            <div class="product-grid-item-bottom">
-                                <h:outputText value="#{userBean.selectedProduct.price}"
-                                              styleClass="product-price">
-                                    <f:convertNumber currencySymbol="$" type="currency"/>
-                                </h:outputText>
-                                <p:commandButton type="button" value="Add To Cart"
-                                                 icon="pi pi-shopping-cart"
-                                                 disabled="#{userBean.selectedProduct.inventoryStatus == 'OUTOFSTOCK'}">
-                                </p:commandButton>
-                            </div>
-                        </div>
-                    </div>
-                </p:column>
-            </p:outputPanel>
-        </p:dialog>
-    </h:form>
-</div>
-		
-</h:body>
-</html>
+					<p:column headerText="Imagen">
+						<h:outputText value="#{ropa.imagen}" />
+					</p:column>
+
+					<p:column headerText="Talla">
+						<h:outputText value="#{ropa.size}" />
+					</p:column>
+
+					<p:column headerText="Color">
+						<h:outputText value="#{ropa.color}" />
+					</p:column>
+
+
+				</p:dataTable>
+			</p:tab>
+		</p:tabView> </div>
+	</h:form>
+
+
+</h:body> </html>
