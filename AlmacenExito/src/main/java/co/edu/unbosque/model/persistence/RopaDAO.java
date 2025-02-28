@@ -3,7 +3,7 @@ package co.edu.unbosque.model.persistence;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.RopaDTO;
-
+//a
 public class RopaDAO implements CRUDOperation<RopaDTO> {
 
 	private ArrayList<RopaDTO> listaRopa;
