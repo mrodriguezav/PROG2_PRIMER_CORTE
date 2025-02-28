@@ -42,7 +42,7 @@ public class RopaBean implements Serializable {
 		rDAO.crear(new RopaDTO(id, precio, cantidad, nombre, descripcion, imagen, size, color));
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto Agregado exitosamente"));
-
+		cleanFields();
 	}
 
 	public void delete(RopaDTO selected) {
@@ -92,6 +92,15 @@ public class RopaBean implements Serializable {
 		this.color = "";
 	}
 
+	public boolean checkButton() {
+		return button;
+	}
+	
+	public void action() {
+		button = false;
+	}
+
+	
 	public String getId() {
 		return id;
 	}

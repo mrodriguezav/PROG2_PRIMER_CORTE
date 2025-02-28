@@ -77,15 +77,15 @@
 					<h5>Talla:</h5>
 					<h:inputText class="form-control" id="talla"
 						value="#{RopaBean.size}" />
-						
+
 					<h5>Color:</h5>
 					<h:inputText class="form-control" id="color"
 						value="#{RopaBean.color}" />
 
 				</h:panelGrid>
 
-				<p:commandButton class="ui-button-primary"
-					action="#{RopaBean.save}" value="Save" update="@form" />
+				<p:commandButton class="ui-button-primary" action="#{RopaBean.save}"
+					value="Save" update="@form" />
 			</p:tab>
 
 			<!-- TAB ELIMINAR -->
@@ -164,19 +164,16 @@
 				</h:panelGrid>
 
 				<p:commandButton value="Seleccionar prenda:"
-					action="#{RopaBean.action}"
-					rendered="#{RopaBean.button}" update="@form"
-					styleClass="ui-button-primary" />
+					action="#{RopaBean.action}" rendered="#{RopaBean.button}"
+					update="@form" styleClass="ui-button-primary" />
 
-				<p:commandButton value="Actualizar"
-					action="#{RopaBean.update}" update="@form"
-					styleClass="ui-button-primary" />
+				<p:commandButton value="Actualizar" action="#{RopaBean.update}"
+					update="@form" styleClass="ui-button-primary" />
 			</p:tab>
 
 			<!-- TAB MOSTRAR -->
 			<p:tab title="Mostrar">
-				<p:dataTable var="ropa" value="#{RopaBean.list}"
-					style="width:100%">
+				<p:dataTable var="ropa" value="#{RopaBean.list}" style="width:100%">
 					<p:column headerText="Id">
 						<h:outputText value="#{ropa.id}" />
 					</p:column>
@@ -197,10 +194,17 @@
 						<h:outputText value="#{ropa.descripcion}" />
 					</p:column>
 
+
+					<p:column headerText="Imagen">
+						<h:graphicImage value="#{ropa.imagen}" alt="Imagen" width="100"
+							height="100" />
+					</p:column>
+					
+					<!-- 
 					<p:column headerText="Imagen">
 						<h:outputText value="#{ropa.imagen}" />
 					</p:column>
-
+ 					-->
 					<p:column headerText="Talla">
 						<h:outputText value="#{ropa.size}" />
 					</p:column>

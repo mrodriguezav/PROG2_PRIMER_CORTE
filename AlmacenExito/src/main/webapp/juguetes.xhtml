@@ -60,5 +60,234 @@
 			</p:megaMenu>
 		</h:form>
 	</div>
+	
+	<h1>Tabla de producto: Juguetes</h1>
+	<hr />
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<div class="card">
+			<h5 class="mt-0">Administrando Juguetería</h5>
+			<p:tabView>
+
+				<p:tab title="Crear">
+					<h:panelGrid columns="2" style="width:100%">
+
+						<h5>Precio:</h5>
+						<h:inputText class="form-control" id="precio"
+							value="#{JugueteBean.precio}">
+							<f:convertNumber doubleOnly="true" />
+						</h:inputText>
+
+
+						<h5>Cantidad:</h5>
+						<h:inputText class="form-control" id="cantidad"
+							value="#{JugueteBean.cantidad}" />
+
+						<h5>Nombre:</h5>
+						<h:inputText class="form-control" id="nombre"
+							value="#{JugueteBean.nombre}" />
+
+						<h5>Descripción:</h5>
+						<h:inputText class="form-control" id="descripcion"
+							value="#{JugueteBean.descripcion}" />
+
+						<h5>Imagen:</h5>
+						<h:inputText class="form-control" id="imagen"
+							value="#{JugueteBean.imagen}" />
+
+						<div class="ui-fluid formgrid grid">
+							<div class="field col-12 md:col-4">
+								<h5>Tipo:</h5>
+								<p:selectOneMenu id="tipo"
+									value="#{JugueteBean.tipo}">
+									<f:selectItem itemLabel="Selecciona una" itemValue="" />
+									<f:selectItem itemLabel="Juguetes de construcción" itemValue="Res" />
+									<f:selectItem itemLabel="Juguetes educativos" itemValue="Cerdo" />
+									<f:selectItem itemLabel="Juguetes electrónicos" itemValue="Pollo" />
+									<f:selectItem itemLabel="Juguetes creativos y artísticos" itemValue="Cordero" />
+									<f:selectItem itemLabel="Juguetes de mesa y estrategia" itemValue="Pescado" />
+									<f:facet name="footer">
+										<p:divider styleClass="mt-0" />
+										<h:outputText value="5 opciones" style="font-weight:bold;" />
+									</f:facet>
+								</p:selectOneMenu>
+								
+								<h5>Marca:</h5>
+								<p:selectOneMenu id="marca"
+									value="#{JugueteBean.marca}">
+									<f:selectItem itemLabel="Selecciona una" itemValue="" />
+									<f:selectItem itemLabel="LEGO" itemValue="Res" />
+									<f:selectItem itemLabel="Sony PlayStation" itemValue="Cerdo" />
+									<f:selectItem itemLabel="NERF" itemValue="Pollo" />
+									<f:selectItem itemLabel="Fisher-Price" itemValue="Cordero" />
+									<f:selectItem itemLabel="Tonka" itemValue="Pescado" />
+									<f:facet name="footer">
+										<p:divider styleClass="mt-0" />
+										<h:outputText value="5 opciones" style="font-weight:bold;" />
+									</f:facet>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						
+					</h:panelGrid>
+
+					<p:commandButton class="ui-button-primary"
+						action="#{JugueteBean.save}" value="Save" update="@form" />
+				</p:tab>
+
+				<!-- TAB ELIMINAR -->
+				<p:tab title="Eliminar">
+					<p:dataTable var="juguete" value="#{JugueteBean.listj}"
+						selectionMode="single" selection="#{JugueteBean.selected}"
+						rowKey="#{juguete.nombre}" style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{juguete.nombre}" />
+						</p:column>
+						<p:column headerText="Acciones">
+							<p:commandButton value="Eliminar"
+								action="#{JugueteBean.delete(juguete)}" update="@form"
+								styleClass="ui-button-danger" />
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+
+				<!-- TAB ACTUALIZAR -->
+				<p:tab title="Actualizar">
+					<h:outputText
+						value="Seleccione un juguete para actualizar:" />
+					<p:dataTable var="juguete" value="#{JugueteBean.listj}"
+						selectionMode="single" selection="#{JugueteBean.selected}"
+						rowKey="#{juguete.id}" style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{juguete.nombre}" />
+						</p:column>
+					</p:dataTable>
+					<hr></hr>
+
+					<!-- FORMULARIO DE EDICIÓN -->
+					<h:panelGrid columns="2" style="width:100%">
+
+						<h5>Precio:</h5>
+						<h:inputText id="precioEdit" class="form-control"
+							value="#{JugueteBean.selected.precio}"
+							rendered="#{not empty JugueteBean.selected}">
+							<f:convertNumber integerOnly="true" />
+						</h:inputText>
+
+						<h5>Cantidad:</h5>
+						<h:inputText id="cantidadEdit" class="form-control"
+							value="#{JugueteBean.selected.cantidad}"
+							rendered="#{not empty JugueteBean.selected}">
+							<f:convertNumber integerOnly="true" />
+						</h:inputText>
+
+						<h5>Nombre:</h5>
+						<h:inputText id="nombreEdit" class="form-control"
+							value="#{JugueteBean.selected.nombre}"
+							rendered="#{not empty JugueteBean.selected}" />
+
+						<h5>Descripcion:</h5>
+						<h:inputText id="descripcionEdit" class="form-control"
+							value="#{JugueteBean.selected.descripcion}"
+							rendered="#{not empty JugueteBean.selected}" />
+
+						<h5>Imagen:</h5>
+						<h:inputText id="imagenEdit" class="form-control"
+							value="#{JugueteBean.selected.imagen}"
+							rendered="#{not empty JugueteBean.selected}" />
+
+						<div class="ui-fluid formgrid grid">
+							<div class="field col-12 md:col-4">
+								<h5>Tipo:</h5>
+								<p:selectOneMenu id="Tipo"
+									value="#{JugueteBean.tipo}">
+									<f:selectItem itemLabel="Selecciona una" itemValue="" />
+									<f:selectItem itemLabel="Juguetes de construcción" itemValue="Res" />
+									<f:selectItem itemLabel="Juguetes educativos" itemValue="Cerdo" />
+									<f:selectItem itemLabel="Juguetes electrónicos" itemValue="Pollo" />
+									<f:selectItem itemLabel="Juguetes creativos y artísticos" itemValue="Cordero" />
+									<f:selectItem itemLabel="Juguetes de mesa y estrategia" itemValue="Pescado" />
+									<f:facet name="footer">
+										<p:divider styleClass="mt-0" />
+										<h:outputText value="5 opciones" style="font-weight:bold;" />
+									</f:facet>
+								</p:selectOneMenu>
+								
+								<h5>Marca:</h5>
+								<p:selectOneMenu id="Marca"
+									value="#{JugueteBean.marca}">
+									<f:selectItem itemLabel="Selecciona una" itemValue="" />
+									<f:selectItem itemLabel="LEGO" itemValue="Res" />
+									<f:selectItem itemLabel="Sony PlayStation" itemValue="Cerdo" />
+									<f:selectItem itemLabel="NERF" itemValue="Pollo" />
+									<f:selectItem itemLabel="Fisher-Price" itemValue="Cordero" />
+									<f:selectItem itemLabel="Tonka" itemValue="Pescado" />
+									<f:facet name="footer">
+										<p:divider styleClass="mt-0" />
+										<h:outputText value="5 opciones" style="font-weight:bold;" />
+									</f:facet>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+				
+
+					</h:panelGrid>
+
+					<p:commandButton value="Seleccionar juguete"
+						action="#{JugueteBean.action}"
+						rendered="#{JugueteBean.button}" update="@form"
+						styleClass="ui-button-primary" />
+
+					<p:commandButton value="Actualizar"
+						action="#{JugueteBean.update}" update="@form"
+						styleClass="ui-button-primary" />
+				</p:tab>
+
+				<!-- TAB MOSTRAR -->
+				<p:tab title="Mostrar">
+					<p:dataTable var="juguete" value="#{JugueteBean.listj}"
+						style="width:100%">
+						<p:column headerText="Id">
+							<h:outputText value="#{juguete.id}" />
+						</p:column>
+
+						<p:column headerText="Precio">
+							<h:outputText value="#{juguete.precio}" />
+						</p:column>
+
+						<p:column headerText="Cantidad">
+							<h:outputText value="#{juguete.cantidad}" />
+						</p:column>
+
+						<p:column headerText="Nombre">
+							<h:outputText value="#{juguete.nombre}" />
+						</p:column>
+
+						<p:column headerText="Descripcion">
+							<h:outputText value="#{juguete.descripcion}" />
+						</p:column>
+
+						<p:column headerText="Imagen">
+                                <h:graphicImage value="#{juguete.imagen}"
+                                    alt="Imagen" width="100" height="100" />
+                            </p:column>
+
+						<p:column headerText="Tipo">
+							<h:outputText value="#{juguete.tipo}" />
+						</p:column>
+
+						<p:column headerText="Marca">
+							<h:outputText value="#{juguete.marca}" />
+						</p:column>
+
+
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+		</div>
+	</h:form>
 </h:body>
 </html>

@@ -17,15 +17,17 @@ public class JugueteDAO implements CRUDOperation<JugueteDTO> {
     /** Nombre del archivo serializado donde se almacena la información. */
     private final String SERIALIZED_NAME = "juguetes.bat";
 
+	
+	
     /**
      * Constructor de la clase. Inicializa la lista de juguetes y carga los datos serializados.
      */
     public JugueteDAO() {
-        FileHandler.checkFolder();
-        readSerialized();
+    	FileHandler.checkFolder();
+    	readSerialized();
     }
-
-    /**
+	
+	/**
      * Agrega un nuevo objeto JugueteDTO a la lista si no existe previamente.
      * @param newData El objeto JugueteDTO a agregar.
      */
@@ -36,6 +38,9 @@ public class JugueteDAO implements CRUDOperation<JugueteDTO> {
             writeSerialized();
         }
     }
+	
+
+    
 
     /**
      * Elimina un objeto JugueteDTO de la lista si existe.
