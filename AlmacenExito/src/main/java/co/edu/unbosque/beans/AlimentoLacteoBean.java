@@ -1,6 +1,6 @@
 /**
  * Bean administrado para la gestión de objetos AlimentoLacteoDTO en una aplicación JSF.
- * Proporciona métodos para crear, actualizar y eliminar productos.
+ * Proporciona métodos para crear, actualizar y eliminar productos..
  */
 package co.edu.unbosque.beans;
 
