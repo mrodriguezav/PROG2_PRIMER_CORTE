@@ -6,30 +6,26 @@ public class AlimentoCarnicoDTO extends Producto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String animalOrigen;
-	private double peso;
-	private boolean esProcesada;
+	private int peso;
 
 	public AlimentoCarnicoDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlimentoCarnicoDTO(String animalOrigen, double peso, boolean esProcesada) {
+	public AlimentoCarnicoDTO(String animalOrigen, int peso) {
 		super();
 		this.animalOrigen = animalOrigen;
 		this.peso = peso;
-		this.esProcesada = esProcesada;
 	}
 
-	public AlimentoCarnicoDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen,
-			String animalOrigen, double peso, boolean esProcesada) {
+	public AlimentoCarnicoDTO(String id, int precio, int cantidad, String nombre, String descripcion, String imagen,
+			String animalOrigen, int peso) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		this.animalOrigen = animalOrigen;
 		this.peso = peso;
-		this.esProcesada = esProcesada;
 	}
 
-	public AlimentoCarnicoDTO(String id, double precio, int cantidad, String nombre, String descripcion,
-			String imagen) {
+	public AlimentoCarnicoDTO(String id, int precio, int cantidad, String nombre, String descripcion, String imagen) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		// TODO Auto-generated constructor stub
 	}
@@ -42,20 +38,12 @@ public class AlimentoCarnicoDTO extends Producto implements Serializable {
 		this.animalOrigen = animalOrigen;
 	}
 
-	public double getPeso() {
+	public int getPeso() {
 		return peso;
 	}
 
-	public void setPeso(double peso) {
+	public void setPeso(int peso) {
 		this.peso = peso;
-	}
-
-	public boolean isEsProcesada() {
-		return esProcesada;
-	}
-
-	public void setEsProcesada(boolean esProcesada) {
-		this.esProcesada = esProcesada;
 	}
 
 	public static long getSerialversionuid() {
@@ -64,8 +52,7 @@ public class AlimentoCarnicoDTO extends Producto implements Serializable {
 
 	@Override
 	public String toString() {
-		return super.toString() + "AlimentoCarnicoDTO [animalOrigen=" + animalOrigen + ", peso=" + peso
-				+ ", esProcesada=" + esProcesada;
+		return "AlimentoCarnicoDTO [animalOrigen=" + animalOrigen + ", peso=" + peso + "]";
 	}
 
 }

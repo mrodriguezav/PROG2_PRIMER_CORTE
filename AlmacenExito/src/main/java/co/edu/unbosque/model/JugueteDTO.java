@@ -5,43 +5,37 @@ import java.io.Serializable;
 public class JugueteDTO extends Producto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String tipo; // Educativo, electrónico, de mesa, etc.
+	private String tipoCliente;
 	private String marca;
-	private int edadRecomendada; // Edad mínima recomendada
-	private String material; // Plástico, madera, tela, etc.
 
 	public JugueteDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public JugueteDTO(String tipo, String marca, int edadRecomendada, String material) {
+	public JugueteDTO(String tipoCliente, String marca) {
 		super();
-		this.tipo = tipo;
+		this.tipoCliente = tipoCliente;
 		this.marca = marca;
-		this.edadRecomendada = edadRecomendada;
-		this.material = material;
 	}
 
-	public JugueteDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen,
-			String tipo, String marca, int edadRecomendada, String material) {
+	public JugueteDTO(String id, int precio, int cantidad, String nombre, String descripcion, String imagen,
+			String tipoCliente, String marca) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
-		this.tipo = tipo;
+		this.tipoCliente = tipoCliente;
 		this.marca = marca;
-		this.edadRecomendada = edadRecomendada;
-		this.material = material;
 	}
 
-	public JugueteDTO(String id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
+	public JugueteDTO(String id, int precio, int cantidad, String nombre, String descripcion, String imagen) {
 		super(id, precio, cantidad, nombre, descripcion, imagen);
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getTipoCliente() {
+		return tipoCliente;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
 	}
 
 	public String getMarca() {
@@ -52,26 +46,13 @@ public class JugueteDTO extends Producto implements Serializable {
 		this.marca = marca;
 	}
 
-	public int getEdadRecomendada() {
-		return edadRecomendada;
-	}
-
-	public void setEdadRecomendada(int edadRecomendada) {
-		this.edadRecomendada = edadRecomendada;
-	}
-
-	public String getMaterial() {
-		return material;
-	}
-
-	public void setMaterial(String material) {
-		this.material = material;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + "JugueteDTO [tipo=" + tipo + ", marca=" + marca + ", edadRecomendada="
-				+ edadRecomendada + ", material=" + material + "]";
+		return super.toString()+"JugueteDTO [tipoCliente=" + tipoCliente + ", marca=" + marca + "]";
 	}
 
 }

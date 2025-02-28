@@ -22,15 +22,14 @@ public class AlimentoCarnicoBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private double precio;
+	private int precio;
 	private int cantidad;
 	private String nombre;
 	private String descripcion;
 	private String imagen;
 	private String animalOrigen;
-	private double peso;
+	private int peso;
 	private boolean button = true;
-	private boolean esProcesada;
 	private ArrayList<AlimentoCarnicoDTO> list;
 	private AlimentoCarnicoDAO aDAO;
 	private AlimentoCarnicoDTO selected;
@@ -44,8 +43,7 @@ public class AlimentoCarnicoBean implements Serializable {
 	public void save() {
 		String id = UUID.randomUUID().toString();
 
-		aDAO.crear(new AlimentoCarnicoDTO(id, precio, cantidad, nombre, descripcion, imagen, animalOrigen, peso,
-				esProcesada));
+		aDAO.crear(new AlimentoCarnicoDTO(id, precio, cantidad, nombre, descripcion, imagen, animalOrigen, peso));
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto Agregado exitosamente"));
 
@@ -77,7 +75,7 @@ public class AlimentoCarnicoBean implements Serializable {
 					u.getImagen();
 					u.getAnimalOrigen();
 					u.getPeso();
-					u.isEsProcesada();
+
 					FacesContext.getCurrentInstance().addMessage(null,
 							new FacesMessage("Producto actualizado correctamente"));
 					break;
@@ -89,22 +87,21 @@ public class AlimentoCarnicoBean implements Serializable {
 
 	public void cleanFields() {
 		this.id = "";
-		this.precio = 0.0;
+		this.precio = 0;
 		this.cantidad = 0;
 		this.nombre = "";
 		this.descripcion = "";
 		this.imagen = "";
 		this.animalOrigen = "";
-		this.peso = 0.0;
-		this.esProcesada = false;
-	}
-
-	public void action() {
-		button = false;
+		this.peso = 0;
 	}
 
 	public boolean checkButton() {
 		return button;
+	}
+
+	public void action() {
+		button = false;
 	}
 
 	public String getId() {
@@ -115,11 +112,11 @@ public class AlimentoCarnicoBean implements Serializable {
 		this.id = id;
 	}
 
-	public double getPrecio() {
+	public int getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
 
@@ -163,20 +160,20 @@ public class AlimentoCarnicoBean implements Serializable {
 		this.animalOrigen = animalOrigen;
 	}
 
-	public double getPeso() {
+	public int getPeso() {
 		return peso;
 	}
 
-	public void setPeso(double peso) {
+	public void setPeso(int peso) {
 		this.peso = peso;
 	}
 
-	public boolean isEsProcesada() {
-		return esProcesada;
+	public boolean isButton() {
+		return button;
 	}
 
-	public void setEsProcesada(boolean esProcesada) {
-		this.esProcesada = esProcesada;
+	public void setButton(boolean button) {
+		this.button = button;
 	}
 
 	public ArrayList<AlimentoCarnicoDTO> getList() {

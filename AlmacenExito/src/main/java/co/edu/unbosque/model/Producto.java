@@ -10,7 +10,7 @@ public class Producto implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private double precio;
+	private int precio;
 	private int cantidad;
 	private String nombre;
 	private String descripcion;
@@ -20,7 +20,7 @@ public class Producto implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Producto(String id, double precio, int cantidad, String nombre, String descripcion, String imagen) {
+	public Producto(String id, int precio, int cantidad, String nombre, String descripcion, String imagen) {
 		super();
 		this.id = id;
 		this.precio = precio;
@@ -38,11 +38,11 @@ public class Producto implements Serializable {
 		this.id = id;
 	}
 
-	public double getPrecio() {
+	public int getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
 

@@ -67,19 +67,18 @@
 		</h:form>
 	</div>
 
-	<h1>Tabla de Alimentos Carnicos</h1>
+	<h1>Tabla de producto: alimento carnico</h1>
 	<hr />
 	<h:form id="form">
 		<p:growl id="msgs" showDetail="true" />
 
 		<div class="card">
-			<h5 class="mt-0">Gestión de Alimentos Carnicos</h5>
+			<h5 class="mt-0">Administrando carnicos</h5>
 			<p:tabView>
-				<!-- TAB CREAR -->
+
 				<p:tab title="Crear">
 					<h:panelGrid columns="2" style="width:100%">
 
-						<!-- MI PRECIO ES UN DOUBLE -->
 						<h5>Precio:</h5>
 						<h:inputText class="form-control" id="precio"
 							value="#{AlimentoCarnicoBean.precio}">
@@ -87,7 +86,6 @@
 						</h:inputText>
 
 
-						<!-- MI CANTIDAD ES UN ENTERO-->
 						<h5>Cantidad:</h5>
 						<h:inputText class="form-control" id="cantidad"
 							value="#{AlimentoCarnicoBean.cantidad}" />
@@ -129,11 +127,6 @@
 						<h5>Peso:</h5>
 						<h:inputText class="form-control" id="peso"
 							value="#{AlimentoCarnicoBean.peso}" />
-
-						<h5>Es procesada?</h5>
-						<h:selectBooleanCheckbox id="procesada"
-							value="#{AlimentoCarnicoBean.esProcesada}" />
-
 					</h:panelGrid>
 
 					<p:commandButton class="ui-button-primary"
@@ -182,8 +175,10 @@
 						<h5>Cantidad:</h5>
 						<h:inputText id="cantidadEdit" class="form-control"
 							value="#{AlimentoCarnicoBean.selected.cantidad}"
-							rendered="#{not empty AlimentoCarnicoBean.selected}" />
-
+							rendered="#{not empty AlimentoCarnicoBean.selected}">
+							<f:convertNumber integerOnly="true" />
+						</h:inputText>
+						
 						<h5>Nombre:</h5>
 						<h:inputText id="nombreEdit" class="form-control"
 							value="#{AlimentoCarnicoBean.selected.nombre}"
@@ -235,7 +230,7 @@
 
 					<p:commandButton value="Seleccionar alimento Carnico"
 						action="#{AlimentoCarnicoBean.action}"
-						rendered="#{AlimentoCarnicoBean.checkButton}" update="@form"
+						rendered="#{AlimentoCarnicoBean.button}" update="@form"
 						styleClass="ui-button-primary" />
 
 					<p:commandButton value="Actualizar"
